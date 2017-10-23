@@ -18,7 +18,8 @@ def test_node_object_exists():
 
 
 def test_set_data_method():
-    """Test that the set_data method returns something."""
+    """Test that the set_data method works and returns something."""
     from linked_list import Node
     node = Node(1, 2)
     assert node.set_data(6) is not None
+    assert node.data == 6

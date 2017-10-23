@@ -21,7 +21,7 @@ class Node(object):
         """Define what the next node is."""
         self.next = next
 
-    def get_next(self, next):
+    def get_next(self):
         """Return what the next node is."""
         return self.next
 
@@ -55,3 +55,19 @@ class LinkedList(object):
                 return current_node
             current_node = current_node.get_next()
         return None
+
+    def remove(self, val):
+        """Remove a node from the list."""
+        previous_node = None
+        current_node = self.head
+        while current_node:
+            if current_node.get_data() == val:
+                if previous_node:
+                    previous_node.next = current_node.get_next()
+                    return None
+                else:
+                    self.head = current_node.get_next()
+                    return None
+            previous_node = current_node
+            current_node = current_node.get_next()
+        raise ValueError("Data not in list")

@@ -46,3 +46,12 @@ class LinkedList(object):
         """Define the push method for LinkedList-class object."""
         new_node = Node(val, self.head)
         self.head = new_node
+
+    def search(self, val):
+        """Search the linked list for a node with a particular value."""
+        current_node = self.head
+        while current_node:
+            if current_node.get_data() == val:
+                return current_node
+            current_node = current_node.get_next()
+        return None

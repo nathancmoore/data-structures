@@ -4,7 +4,7 @@
 class Node(object):
     """Define Node-class objects."""
 
-    def __init__(self, data, next):
+    def __init__(self, data=None, next=None):
         """Initiate a new instance of a Node object with attributes."""
         self.data = data
         self.next = next
@@ -31,7 +31,7 @@ class LinkedList(object):
 
     def __init__(self, head):
         """Initiate a new instance of a LinkedList object with attributes."""
-        self.head = head
+        self.head = None
 
     def size(self):
         """Define the size method of the LinkedList-class object."""
@@ -44,6 +44,8 @@ class LinkedList(object):
 
     def push(self, val):
         """Define the push method for LinkedList-class object."""
-        self.head = Node(val)
-        
+        new_node = Node(val, self.head)
+        self.head = new_node
+
+
 

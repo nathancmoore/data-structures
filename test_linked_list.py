@@ -7,7 +7,15 @@ def test_get_data_method():
     """Test that the get_data method returns something."""
     from linked_list import Node
     node = Node(1, 2)
-    assert node.get_data() is not None
+    node.set_data(1)
+    assert node.get_data() == 1
+
+def test_get_next_method():
+    """Test that the get_data method returns something."""
+    from linked_list import Node
+    node = Node(1, 2)
+    node.set_next(2)
+    assert node.get_next(1) == 2
 
 
 def test_node_object_exists():
@@ -15,11 +23,3 @@ def test_node_object_exists():
     from linked_list import Node
     node = Node(0, 1)
     assert node
-
-
-def test_set_data_method():
-    """Test that the set_data method works and returns something."""
-    from linked_list import Node
-    node = Node(1, 2)
-    assert node.set_data(6) is not None
-    assert node.data == 6

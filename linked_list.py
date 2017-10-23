@@ -16,12 +16,10 @@ class Node(object):
     def set_data(self, data):
         """Write something here."""
         self.data = data
-        return self.data
 
     def set_next(self, next):
         """Define what the next node is."""
         self.next = next
-        return self.next
 
     def get_next(self, next):
         """Return what the next node is."""
@@ -31,9 +29,9 @@ class Node(object):
 class LinkedList(object):
     """Define LinkedList-class objects."""
 
-    def __init__(self):
+    def __init__(self, head):
         """Initiate a new instance of a LinkedList object with attributes."""
-        self.head = ""
+        self.head = head
 
     def size(self):
         """Define the size method of the LinkedList-class object."""
@@ -46,4 +44,6 @@ class LinkedList(object):
 
     def push(self, val):
         """Define the push method for LinkedList-class object."""
+        self.head = Node(val)
+        
 

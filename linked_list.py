@@ -29,7 +29,7 @@ class Node(object):
 class LinkedList(object):
     """Define LinkedList-class objects."""
 
-    def __init__(self, head):
+    def __init__(self):
         """Initiate a new instance of a LinkedList object with attributes."""
         self.head = None
 
@@ -46,6 +46,3 @@ class LinkedList(object):
         """Define the push method for LinkedList-class object."""
         new_node = Node(val, self.head)
         self.head = new_node
-
-
-

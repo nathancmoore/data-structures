@@ -16,3 +16,4 @@ class Node(object):
     def set_data(self, data):
         """Write something here."""
         self.data = data
+        return self.data

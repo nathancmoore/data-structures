@@ -61,3 +61,14 @@ def test_pop_full():
     test_linked_list.push(7)
     assert test_linked_list.pop() == 7
     assert test_linked_list.size() == 2
+
+
+def test_display_full():
+    """Ensure that display works."""
+    from linked_list import LinkedList
+    test_linked_list = LinkedList()
+    test_linked_list.push(3)
+    test_linked_list.push(5)
+    test_linked_list.push(7)
+    assert test_linked_list.display() is not None
+    assert type(test_linked_list.display()) == str

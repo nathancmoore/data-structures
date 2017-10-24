@@ -82,17 +82,18 @@ class LinkedList(object):
             return popped_node.data
 
     def display(self):
-        """Displays unicode string of linked list contents."""
+        """Display unicode string of linked list contents."""
         display_str = "("
 
         if self.head is None:
-            return "()".encode('utf8')
+            return "()"
 
         current_node = self.head
 
         while current_node:
             if current_node.next is None:
                 display_str += str(current_node.data) + ")"
-                return display_str.encode('utf8')
+                return display_str
             else:
-                 display_str += str(current_node.data) + ", "
+                display_str += str(current_node.data) + ", "
+                current_node = current_node.next

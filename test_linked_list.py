@@ -72,3 +72,25 @@ def test_display_full():
     test_linked_list.push(7)
     assert test_linked_list.display() is not None
     assert type(test_linked_list.display()) == str
+
+
+def test_len():
+    """Ensure that our altered len() works."""
+    from linked_list import LinkedList
+    test_linked_list = LinkedList()
+    test_linked_list.push(3)
+    test_linked_list.push(5)
+    test_linked_list.push(7)
+    assert len(test_linked_list) is not None
+    assert len(test_linked_list) == 3
+
+
+def test_display():
+    """Ensure that our altered len() works."""
+    from linked_list import LinkedList
+    test_linked_list = LinkedList()
+    test_linked_list.push(3)
+    test_linked_list.push(5)
+    test_linked_list.push(7)
+    assert str(test_linked_list) is not None
+    assert str(test_linked_list) == "(7, 5, 3)"

@@ -9,25 +9,17 @@ class Node(object):
         self.data = data
         self.next = next
 
-    def get_data(self):
-        """Write something here."""
-        return self.data
-
-    def set_data(self, data):
-        """Write something here."""
-        self.data = data
-
-    def set_next(self, next):
-        """Define what the next node is."""
-        self.next = next
-
-    def get_next(self):
-        """Return what the next node is."""
-        return self.next
-
 
 class LinkedList(object):
     """Define LinkedList-class objects."""
+
+    def __len__(self):
+        """Change the len() method."""
+        return self.size()
+
+    def __str__(self):
+        """Change the print() method."""
+        return self.display()
 
     def __init__(self):
         """Initiate a new instance of a LinkedList object with attributes."""
@@ -39,7 +31,7 @@ class LinkedList(object):
         count = 0
         while current_node:
             count += 1
-            current_node = current_node.get_next()
+            current_node = current_node.next
         return count
 
     def push(self, val):
@@ -51,9 +43,9 @@ class LinkedList(object):
         """Search the linked list for a node with a particular value."""
         current_node = self.head
         while current_node:
-            if current_node.get_data() == val:
+            if current_node.data == val:
                 return current_node
-            current_node = current_node.get_next()
+            current_node = current_node.next
         return None
 
     def remove(self, val):
@@ -61,15 +53,15 @@ class LinkedList(object):
         previous_node = None
         current_node = self.head
         while current_node:
-            if current_node.get_data() == val:
+            if current_node.data == val:
                 if previous_node:
-                    previous_node.next = current_node.get_next()
+                    previous_node.next = current_node.next
                     return None
                 else:
-                    self.head = current_node.get_next()
+                    self.head = current_node.next
                     return None
             previous_node = current_node
-            current_node = current_node.get_next()
+            current_node = current_node.next
         raise ValueError("Data not in list")
 
     def pop(self):
@@ -97,9 +89,3 @@ class LinkedList(object):
             else:
                 display_str += str(current_node.data) + ", "
                 current_node = current_node.next
-
-def __len__(self):
-    return self.size()
-
-def __print__(self):
-    return self.display()

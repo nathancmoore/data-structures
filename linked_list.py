@@ -1,4 +1,4 @@
-"""This is the docstring."""
+"""Form a linked list using classes."""
 
 
 class Node(object):
@@ -73,11 +73,10 @@ class LinkedList(object):
         raise ValueError("Data not in list")
 
     def pop(self):
-
+        """Remove and returns the head node of the list."""
         if self.head is None:
             raise IndexError("List is empty")
         else:
             popped_node = self.head
             self.head = self.head.next
-            return popped_node
-
+            return popped_node.data

@@ -35,5 +35,8 @@ def test_search_not_fount():
     """Test that will search for value not in list """
     from linked_list import LinkedList
     test_linked_list = LinkedList()
+    test_linked_list.push(5)
+    test_linked_list.push(7)
+    test_linked_list.push(10)
     assert test_linked_list.search(5) == None
     

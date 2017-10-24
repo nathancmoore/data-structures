@@ -71,3 +71,13 @@ class LinkedList(object):
             previous_node = current_node
             current_node = current_node.get_next()
         raise ValueError("Data not in list")
+
+    def pop(self):
+
+        if self.head is None:
+            raise IndexError("List is empty")
+        else:
+            popped_node = self.head
+            self.head = self.head.next
+            return popped_node
+

@@ -97,3 +97,9 @@ class LinkedList(object):
             else:
                 display_str += str(current_node.data) + ", "
                 current_node = current_node.next
+
+def __len__(self):
+    return self.size()
+
+def __print__(self):
+    return self.display()

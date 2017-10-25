@@ -21,3 +21,17 @@ def test_search_not_found():
     test_dlinked_list.push(7)
     test_dlinked_list.push(10)
     assert test_dlinked_list.search(11) is None
+
+def test_search_for_appended_found():
+    from doubly_linked_list import DLinkedList
+    test_dlinked_list = DLinkedList()
+    test_dlinked_list.append(20)
+    assert test_dlinked_list.search(20)
+
+def test_search_for_appended_not_found():
+    from doubly_linked_list import DLinkedList
+    test_dlinked_list = DLinkedList()
+    test_dlinked_list.append(5)
+    test_dlinked_list.append(7)
+    test_dlinked_list.append(10)
+    assert test_dlinked_list.search(11) is None

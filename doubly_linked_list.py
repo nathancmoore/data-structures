@@ -80,16 +80,16 @@ class DLinkedList(object):
 
                 if current_node == self.head:
                     self.head = current_node.next_node
-                    break
+                    return
 
                 elif current_node == self.tail:
                     self.tail = current_node.prev_node
-                    break
+                    return
 
                 else:
                     current_node.prev_node.next_node = current_node.next_node
                     current_node.next_node.prev_node = current_node.prev_node
-                    break
+                    return
 
             else:
                 current_node = current_node.next_node

@@ -1,4 +1,8 @@
+"""Test the functionality of the Stack class."""
+
+
 import pytest
+
 
 def test_pop_empty():
     """Ensure that the pop method raises an error on an empty list."""
@@ -17,7 +21,6 @@ def test_pop_full():
     test_stack.push(7)
     assert test_stack.pop() == 7
     assert test_stack.size() == 2
-
 
 
 def test_len():

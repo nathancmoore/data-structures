@@ -74,18 +74,26 @@ class DLinkedList(object):
 
     def remove(self, val):
         """Remove a node from the list."""
-        previous_node = None
         current_node = self.head
         while current_node:
             if current_node.data == val:
-                if previous_node:
-                    previous_node.next = current_node.next
-                    return None
+
+                if current_node == self.head:
+                    self.head = current_node.next_node
+                    break
+
+                elif current_node == self.tail:
+                    self.tail = current_node.prev_node
+                    break
+
                 else:
-                    self.head = current_node.next
-                    return None
-            previous_node = current_node
-            current_node = current_node.next
+                    current_node.prev_node.next_node = current_node.next_node
+                    current_node.next_node.prev_node = current_node.prev_node
+                    break
+
+            else:
+                current_node = current_node.next_node
+
         raise ValueError("Data not in list")
 
     def pop(self):

@@ -6,7 +6,8 @@ Singly Linked List
 ******************
 We have implemented a singly linked list using a Node and Linked List Class.
 
-We have the following methods
+We have the following methods. Additionally, we have overwritten the existing methods for len()
+and str() to reflect the size and contents of the list.
 
 Push
 Insert new Node to the front of the list.

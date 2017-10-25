@@ -1,23 +1,8 @@
 """These are tests for linked_list.py."""
 
+"""Test Class for Linked List"""
+
 import pytest
-
-
-# def test_get_data_method():
-#     """Test that the get_data method returns something."""
-#     from linked_list import Node
-#     node = Node(1, 2)
-#     node.set_data(1)
-#     assert node.get_data() == 1
-
-
-# def test_get_next_method():
-#     """Test that the get_data method returns something."""
-#     from linked_list import Node
-#     node = Node(1, 2)
-#     node.set_next(2)
-#     assert node.get_next(1) == 2
-
 
 def test_node_object_exists():
     """Test that the Node class definition is working."""

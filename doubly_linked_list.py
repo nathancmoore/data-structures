@@ -23,25 +23,45 @@ class DLinkedList(object):
         return self.display()
 
     def __init__(self):
-        """Initiate a new instance of a LinkedList object with attributes."""
+        """Initiate a new instance of a DLinkedList object with attributes."""
         self.head = None
         self.tail = None
 
     def size(self):
-        """Define the size method of the LinkedList-class object."""
+        """Define the size method of the DLinkedList-class object."""
         current_node = self.head
         count = 0
         while current_node:
             count += 1
             current_node = current_node.next_node
+
         return count
 
     def push(self, val):
-        """Define the push method for LinkedList-class object."""
+        """Define the push method for DLinkedList-class object."""
         new_node = Node(val, self.head)
-        if self.head is not None:
+
+        if self.size() == 0:
+            self.tail = new_node
+            self.head = new_node
+
+        else:
             self.head.prev_node = new_node
+
         self.head = new_node
+
+    def append(self, val):
+        """Define the append method for DLinkedList-class object."""
+        new_node = Node(val, None, self.tail)
+
+        if self.size() == 0:
+            self.tail = new_node
+            self.head = new_node
+
+        else:
+            self.tail.next_node = new_node
+
+        self.tail = new_node
 
     def search(self, val):
         """Search the linked list for a node with a particular value."""

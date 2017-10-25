@@ -1,13 +1,15 @@
 """Define the Stack class."""
-from linked_list import Node
 from linked_list import LinkedList
 
-class Stack(LinkedList):
+class Stack:
     """Define Stack-class objects."""
 
-    def __init__(self):
+    def __init__(self, iterable = ()):
         """Initiate a new instance of a LinkedList object with attributes."""
         self.linked_list = LinkedList()
+        if isinstance(iterable, (str, tuple, list)):
+            for item in iterable:
+                self.push(item)
 
     def size(self):
         """Define the size method."""

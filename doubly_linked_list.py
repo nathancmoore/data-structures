@@ -39,7 +39,8 @@ class DLinkedList(object):
     def push(self, val):
         """Define the push method for LinkedList-class object."""
         new_node = Node(val, self.head)
-        self.head.prev_node = new_node
+        if self.head is not None:
+            self.head.prev_node = new_node
         self.head = new_node
 
     def search(self, val):
@@ -48,7 +49,7 @@ class DLinkedList(object):
         while current_node:
             if current_node.data == val:
                 return current_node
-            current_node = current_node.next
+            current_node = current_node.next_node
         return None
 
     def remove(self, val):

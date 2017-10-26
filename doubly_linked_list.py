@@ -125,13 +125,10 @@ class DLinkedList(object):
                 current_node = current_node.next
 
     def shift(self):
-        """Rmemove and return the tail node of the list."""
-
+        """Remove and return the tail node of the list."""
         if self.tail is None:
             raise IndexError("List is empty")
         else:
             shift_node = self.tail
-            self.tail = self.tail.previous
+            self.tail = self.tail.prev_node
             return shift_node.data
-
-

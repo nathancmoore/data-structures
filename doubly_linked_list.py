@@ -104,7 +104,7 @@ class DLinkedList(object):
             raise IndexError("List is empty")
         else:
             popped_node = self.head
-            self.head = self.head.next
+            self.head = self.head.next_node
             return popped_node.data
 
     def display(self):
@@ -123,3 +123,15 @@ class DLinkedList(object):
             else:
                 display_str += str(current_node.data) + ", "
                 current_node = current_node.next
+
+    def shift(self):
+        """Rmemove and return the tail node of the list."""
+
+        if self.tail is None:
+            raise IndexError("List is empty")
+        else:
+            shift_node = self.tail
+            self.tail = self.tail.previous
+            return shift_node.data
+
+

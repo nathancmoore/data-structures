@@ -66,16 +66,22 @@ class DLinkedList(object):
     def search(self, val):
         """Search the linked list for a node with a particular value."""
         current_node = self.head
+
         while current_node:
+
             if current_node.data == val:
                 return current_node
+
             current_node = current_node.next_node
+
         return None
 
     def remove(self, val):
         """Remove a node from the list."""
         current_node = self.head
+
         while current_node:
+
             if current_node.data == val:
 
                 if current_node == self.head:
@@ -102,6 +108,7 @@ class DLinkedList(object):
         """Remove and returns the head node of the list."""
         if self.head is None:
             raise IndexError("List is empty")
+
         else:
             popped_node = self.head
             self.head = self.head.next_node
@@ -117,9 +124,11 @@ class DLinkedList(object):
         current_node = self.head
 
         while current_node:
+
             if current_node.next is None:
                 display_str += str(current_node.data) + ")"
                 return display_str
+
             else:
                 display_str += str(current_node.data) + ", "
                 current_node = current_node.next
@@ -128,6 +137,7 @@ class DLinkedList(object):
         """Remove and return the tail node of the list."""
         if self.tail is None:
             raise IndexError("List is empty")
+
         else:
             shift_node = self.tail
             self.tail = self.tail.prev_node

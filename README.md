@@ -79,3 +79,7 @@ Return and remove tail node from list.
 
 Append
 Add new tail to the end of the list.
+
+Time Complexity.
+Shift and Append are of constant time, O(1) whereas any method which utilizes iteration throughout list is 
+O(n) --> example search, display.

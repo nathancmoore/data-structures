@@ -24,6 +24,7 @@ Return the head of a list and then delete it.
 Display
 Print the contents of the List.
 
+
 Time Complexity
 *************
 
@@ -51,3 +52,30 @@ The Pop method returns the first node in a list, then removes it from the list.
 Time Complexity.
 Neither of these methods requires iteration through a list of elements. An element is merely selected and returned.
 This is Constant Time or O(1).
+
+Doubly-Linked List
+******************
+We have implemented a doubly linked list. We now have to take into account the previous node during all operations.
+Nodes point in both directions now. For example, if a node of a middle value is removed --> the previous node
+must point to the node ahead of the current.
+
+Push
+Insert new Node to the front of the list.
+
+Search
+Return a node if it is contained in the list.
+
+Remove
+Delete a node from the list.
+
+Pop
+Return the head of a list and then delete it.
+
+Display
+Print the contents of the List.
+
+Shift 
+Return and remove tail node from list.
+
+Append
+Add new tail to the end of the list.

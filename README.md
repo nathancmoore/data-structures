@@ -83,3 +83,22 @@ Add new tail to the end of the list.
 Time Complexity.
 Shift and Append are of constant time, O(1) whereas any method which utilizes iteration throughout list is 
 O(n) --> example search, display.
+
+Queue
+*********************
+We have implemented a Queue class utilizing a doubly linked list. 
+
+Enqueue
+Adds a new element to the end of a list. The new item becomes the tail, the current tail becomes the next element.
+
+Dequeue
+Returns and removes the head of the list. The previous node now becomes the new head.
+
+Size
+Returns the size of the queue --> The starts from the first element in the queue and works its way backward.
+
+Peak
+Returns without removal the first element in the queue.
+
+Time Complexity.
+As before any insertion or deletion is O(1). Attempts to access the Queue are O(n).

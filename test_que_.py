@@ -13,8 +13,8 @@ def test_head_tail_of_list_of_len_1():
     from que_ import Queue
     q = Queue()
     q.enqueue(5)
-    assert q.head
-    assert q.tail
+    assert q.linked_list.head
+    assert q.linked_list.tail
 
 
 def test_output_of_peek_exists():

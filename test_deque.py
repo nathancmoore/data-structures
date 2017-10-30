@@ -74,40 +74,69 @@ def test_peek_returns_after_pop():
     d.append(6)
     d.append(7)
     d.pop()
-    assert d.peek() == 6
+    assert d.peek().data == 6
 
 
 def test_peek_returns_after_append():
-    """."""
+    """Test that peek works with append method."""
     from deque import QLinkedList
     d = QLinkedList()
+    d.append(5)
+    d.append(6)
+    d.append(7)
+    assert d.peek().data == 7
 
 
 def test_peek_returns_after_popleft():
     """Test that peek returns correct value after a popleft."""
     from deque import QLinkedList
     d = QLinkedList()
+    d.append(5)
+    d.append(6)
+    d.append(7)
+    d.popleft()
+    assert d.peek().data == 7
 
 
 def test_peek_returns_after_appendleft():
-    """."""
+    """Test that peek returns after appendleft."""
     from deque import QLinkedList
     d = QLinkedList()
+    d.appendleft(5)
+    d.appendleft(6)
+    d.appendleft(7)
+    assert d.peek().data == 5
 
 
 def test_peekleft_returns_after_pop():
-    """."""
+    """Test peekleft returns after pop."""
     from deque import QLinkedList
     d = QLinkedList()
+    d.appendleft(5)
+    d.appendleft(6)
+    d.appendleft(7)
+    d.pop()
+    assert d.peekleft().data == 7
 
 
 def test_peekleft_returns_after_append():
-    """."""
+    """Test peekleft works after an append."""
     from deque import QLinkedList
     d = QLinkedList()
+    d.append(5)
+    d.append(6)
+    d.append(7)
+    assert d.peekleft().data == 5
+
+def test_peek_returns_none_on_empty_list():
+    """Test peek with empty list."""
+    from deque import QLinkedList
+    d = QLinkedList()
+    assert d.peek() is None
 
 
 def test_peek_returns_none_on_empty_list():
-    """."""
+    """Test peekleft with empty list."""
     from deque import QLinkedList
     d = QLinkedList()
+    assert d.peekleft() is None

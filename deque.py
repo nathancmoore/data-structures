@@ -1,14 +1,14 @@
 """Define new Class for Node, Linked List, and Dequeue."""
 """Node and Linked List have been rebuilt for practice."""
 
-class Node(object, val):
-     """Define Node-class objects."""
+class Node(object):
+    """Define Node-class objects."""
 
-    def __init__(self, data = None, next_node = None, prev_node = None):
-        """."""
-        self.data = val
+    def __init__(self, data=None, next_node=None, prev_node=None):
+        """Initiate a new instance of a Node object with attributes."""
+        self.data = data
         self.next_node = next_node
-        self.prev_node = next_node
+        self.prev_node = prev_node
 
 
 class QLinkedList(object):
@@ -24,7 +24,7 @@ class QLinkedList(object):
         current_node = self.head
         while current_node:
             count+=1
-            current_node = current_node.next
+            current_node = current_node.next_node
 
         return count
 
@@ -37,6 +37,7 @@ class QLinkedList(object):
             self.tail = new_node
         else:
             self.tail.next_node = new_node
+            new_node.prev_node = self.tail
             self.tail = new_node
     
     def appendleft(self, val):
@@ -47,6 +48,7 @@ class QLinkedList(object):
             self.tail = new_node
         else:
             self.head.prev_node = new_node
+            new_node.next_node = self.head
             self.head = new_node
     
     def pop(self):
@@ -61,13 +63,12 @@ class QLinkedList(object):
             raise(IndexError)
 
     def popleft(self):
-    """Remove and returns the head node of the list."""
+        """Remove and returns the head node of the list."""
         try:
             popped_node = self.head
             self.head.next_node.prev_node = None
             self.head = self.head.next_node
             return popped_node
-
         except:
             raise(IndexError)
 

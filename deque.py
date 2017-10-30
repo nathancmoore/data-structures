@@ -3,7 +3,9 @@
 
 class Node(object, val):
      """Define Node-class objects."""
+
     def __init__(self, data = None, next_node = None, prev_node = None):
+        """."""
         self.data = val
         self.next_node = next_node
         self.prev_node = next_node
@@ -12,6 +14,7 @@ class Node(object, val):
 class QLinkedList(object):
     def __init__(self):
         """Initiate a new instance of a QLinkedList object with attributes."""
+
         self.head = None
         self.tail = None
 

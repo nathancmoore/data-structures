@@ -7,7 +7,7 @@ def test_node_object_exists():
     node = Node(3)
     assert node
 
-'''
+
 def test_append_into_empty():
     """Test that appending into an empty list assigns the node to both head and tail."""
     from deque import QLinkedList
@@ -46,8 +46,8 @@ def test_size_when_appendlefting():
     assert d.size() == 1
     d.appendleft(2)
     assert d.size() == 2
-'''
-'''
+
+
 def test_pop_on_empty():
     """Test that popping an empty list returns none."""
     from deque import QLinkedList
@@ -55,8 +55,8 @@ def test_pop_on_empty():
     d = QLinkedList()
     with pytest.raises(IndexError):
         d.pop()
-'''
-'''
+
+
 def test_popleft_on_empty():
     """Test that popleft-ing an empty list returns none."""
     from deque import QLinkedList
@@ -64,10 +64,10 @@ def test_popleft_on_empty():
     d = QLinkedList()
     with pytest.raises(IndexError):
         d.popleft()
-'''
-'''
+
+
 def test_peek_returns_after_pop():
-    """Test that peek returns correct value after a pop"""
+    """Test that peek returns correct value after a pop."""
     from deque import QLinkedList
     d = QLinkedList()
     d.append(5)
@@ -75,26 +75,39 @@ def test_peek_returns_after_pop():
     d.append(7)
     d.pop()
     assert d.peek() == 6
-'''
-'''
+
+
 def test_peek_returns_after_append():
+    """."""
     from deque import QLinkedList
+    d = QLinkedList()
+
 
 def test_peek_returns_after_popleft():
-    """Test that peek returns correct value after a pop"""
+    """Test that peek returns correct value after a popleft."""
     from deque import QLinkedList
+    d = QLinkedList()
+
 
 def test_peek_returns_after_appendleft():
+    """."""
     from deque import QLinkedList
+    d = QLinkedList()
 
-def test_peek_returns_none_on_empty_list():
 
 def test_peekleft_returns_after_pop():
+    """."""
     from deque import QLinkedList
+    d = QLinkedList()
+
 
 def test_peekleft_returns_after_append():
+    """."""
     from deque import QLinkedList
+    d = QLinkedList()
+
 
 def test_peek_returns_none_on_empty_list():
+    """."""
     from deque import QLinkedList
-    '''
+    d = QLinkedList()

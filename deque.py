@@ -19,9 +19,6 @@ class QLinkedList(object):
         """Define the size method of the QLinkedList-class object."""
         return ""
 
-    def push(self):
-         """Define the push method for QLinkedList-class object."""
-        return ""
     
     def append(self, val):
         """Adds a node to the tail with a specified value."""
@@ -42,23 +39,25 @@ class QLinkedList(object):
         else:
             self.head.prev_node = new_node
             self.head = new_node
-
-    def remove(self):
-        """Remove a node from the list."""
-        return ""
     
     def pop(self):
-        """Remove and returns the head node of the list."""
-        return ""
+        """Remove and returns the tail node of the list."""
+        try:
+            popped_node = self.tail
+            self.tail.prev_node.next_node = None
+            self.tail = self.tail.prev_node
+            return popped_node
 
-    def shift(self):
-        """Remove and return the tail node of the list."""
-        return ""
+        except:
+            raise(IndexError)
 
-    def display(self):
-        """Display unicode string of linked list contents."""
-        return ""
+    def popleft(self):
+    """Remove and returns the head node of the list."""
+    try:
+            popped_node = self.head
+            self.head.next_node.prev_node = None
+            self.head = self.head.next_node
+            return popped_node
 
-    def search(self):
-        """Search the linked list for a node with a particular value."""
-        return ""
+        except:
+            raise(IndexError)

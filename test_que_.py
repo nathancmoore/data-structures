@@ -33,3 +33,12 @@ def test_if_peek_needs_no_inputs():
     q.enqueue(5)
     with pytest.raises(TypeError):
         q.peek(5)
+
+
+def test_queue_len_method_is_working():
+    from que_ import Queue
+    q = Queue()
+    q.enqueue(1)
+    q.enqueue(2)
+    q.enqueue(3)
+    assert len(q) == 3

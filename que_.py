@@ -11,6 +11,10 @@ class Queue(object):
         """Constructor for Queue."""
         self.linked_list = DLinkedList()
 
+    def __len__(self):
+        """Return size of the queue."""
+        return self.linked_list.size()
+
     def enqueue(self, val):
         """Add new element to end of the queue."""
         new_node = Node(self, val)
@@ -33,7 +37,7 @@ class Queue(object):
 
     def peek(self):
         """Return value of next element in queue."""
-        return self.linked_list.head
+        return self.linked_list.head.data
 
     def size(self):
         """Define the size method."""

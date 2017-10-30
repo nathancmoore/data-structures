@@ -128,6 +128,7 @@ def test_peekleft_returns_after_append():
     d.append(7)
     assert d.peekleft().data == 5
 
+
 def test_peek_returns_none_on_empty_list():
     """Test peek with empty list."""
     from deque import QLinkedList
@@ -135,7 +136,7 @@ def test_peek_returns_none_on_empty_list():
     assert d.peek() is None
 
 
-def test_peek_returns_none_on_empty_list():
+def test_peekleft_returns_none_on_empty_list():
     """Test peekleft with empty list."""
     from deque import QLinkedList
     d = QLinkedList()

@@ -1,6 +1,7 @@
 """Define new Class for Node, Linked List, and Dequeue."""
 """Node and Linked List have been rebuilt for practice."""
 
+
 class Node(object):
     """Define Node-class objects."""
 
@@ -11,26 +12,26 @@ class Node(object):
         self.prev_node = prev_node
 
 
-class QLinkedList(object):
-    def __init__(self):
-        """Initiate a new instance of a QLinkedList object with attributes."""
+class Deque(object):
+    """Define Deque-class objects."""
 
+    def __init__(self):
+        """Initiate a new instance of a Deque object with attributes."""
         self.head = None
         self.tail = None
 
     def size(self):
-        """Define the size method of the QLinkedList-class object."""
+        """Define the size method of the Deque-class object."""
         count = 0
         current_node = self.head
         while current_node:
-            count+=1
+            count += 1
             current_node = current_node.next_node
 
         return count
 
-    
     def append(self, val):
-        """Adds a node to the tail with a specified value."""
+        """Add a node to the tail with a specified value."""
         new_node = Node(val)
         if not self.head:
             self.head = new_node
@@ -39,9 +40,9 @@ class QLinkedList(object):
             self.tail.next_node = new_node
             new_node.prev_node = self.tail
             self.tail = new_node
-    
+
     def appendleft(self, val):
-        """Adds a node to the head with a specified value."""
+        """Add a node to the head with a specified value."""
         new_node = Node(val)
         if not self.head:
             self.head = new_node
@@ -50,7 +51,7 @@ class QLinkedList(object):
             self.head.prev_node = new_node
             new_node.next_node = self.head
             self.head = new_node
-    
+
     def pop(self):
         """Remove and returns the tail node of the list."""
         try:
@@ -73,15 +74,15 @@ class QLinkedList(object):
             raise(IndexError)
 
     def peek(self):
-        """Return value from end of list without removing it"""
-        if self.head == None:
+        """Return value from end of list without removing it."""
+        if self.head is None:
             return None
         else:
             return self.tail
 
     def peekleft(self):
-        """Return value from front of list without removing it"""
-        if self.head == None:
+        """Return value from front of list without removing it."""
+        if self.head is None:
             return None
         else:
             return self.head

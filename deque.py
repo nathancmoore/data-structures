@@ -17,7 +17,13 @@ class QLinkedList(object):
 
     def size(self):
         """Define the size method of the QLinkedList-class object."""
-        return ""
+        count = 0
+        current_node = self.head
+        while current_node:
+            count+=1
+            current_node = current_node.next
+
+        return count
 
     
     def append(self, val):
@@ -53,7 +59,7 @@ class QLinkedList(object):
 
     def popleft(self):
     """Remove and returns the head node of the list."""
-    try:
+        try:
             popped_node = self.head
             self.head.next_node.prev_node = None
             self.head = self.head.next_node
@@ -61,3 +67,17 @@ class QLinkedList(object):
 
         except:
             raise(IndexError)
+
+    def peek(self):
+        """Return value from end of list without removing it"""
+        if self.head == None:
+            return None
+        else:
+            return self.tail
+
+    def peekleft(self):
+        """Return value from front of list without removing it"""
+        if self.head == None:
+            return None
+        else:
+            return self.head

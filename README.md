@@ -102,3 +102,24 @@ Returns without removal the first element in the queue.
 
 Time Complexity.
 As before any insertion or deletion is O(1). Attempts to access the Queue are O(n).
+
+
+Deque
+*********************
+We have created a Deque class, which is a doubly-linked list which can be appended to or popped from either the right or left of the list.
+
+It has the following methods:
+
+size(): Measures the number of nodes in the deque, with a time complexity of O(n)
+
+pop(): removes and returns the tail node, with a time complexity of O(1)
+
+popleft(): removes and returns the head node, with a time complexity of O(1)
+
+append(): adds a new node to the tail of the list, with a time complexity of O(1)
+
+appendleft(): adds a new node to the head of the list, with a time complexity of O(1)
+
+peek(): returns the value of the tail of the list, with a time complexity of O(1)
+
+peekleft(): returns the value of the head of the the list, with a time complexity of O(1)

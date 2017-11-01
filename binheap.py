@@ -3,7 +3,9 @@
 
 class Node(object):
     """Define Node-class objects."""
+
     def __init__(self, index=None, value=None):
+        """Assign attributes to the Node object."""
         self.index = index
         self.value = value
         self.left = 2 * self.index + 1
@@ -16,14 +18,15 @@ class Node(object):
             self.parent = (self.index - 2) // 2
         '''
 
+
 class BinHeap(object):
     """Define the class of a max-Binary Heap."""
 
     def __init__(self, iterable=None):
-         """Initiate a new instance of a Binheap object with attributes."""
+        """Initiate a new instance of a Binheap object with attributes."""
         self.heap_list = []
 
-        if isinstance(iterable, list)):
+        if iterable:
             self.heap_list = iterable
 
     def push(self, val):
@@ -31,7 +34,7 @@ class BinHeap(object):
         self.heap_list.append(Node(len(self.heap_list), val))
         self._sort()
 
-    def swap(parent, child):
+    def _swap(self, parent, child):
         """Change indices of two nodes."""
         tmp = parent.index
         parent.index = child.index
@@ -40,20 +43,27 @@ class BinHeap(object):
         self.heap_list[child.index] = child
         self._sort()
 
-    def pop():
+    def pop(self):
         """Return root node of Heap."""
-        swap(self.heap_list[0], self.heap_list[-1]) #swap root with bottom most child
+        self._swap(self.heap_list[0], self.heap_list[-1])
         popped = self.heap_list.pop().value
         self._sort()
         return popped
 
-    def _sort():
-        """Bubble sort on heap."""
+    def _sort(self):
+        """Bubble sort the heap."""
         for i in range(len(self.heap_list)):
             node = self.heap_list[i]
-            if node.value < self.heap_list[node.left]:
-                swap(node, self.heap_list[node.left])
-                i = 0
-            if node.value < self.heap_list[node.right]:
-                swap(node, self.heap_list[node.right])
-                i = 0
+            try:
+                if node.value < self.heap_list[node.left]:
+                    self._swap(node, self.heap_list[node.left])
+                    i = 0
+            except(IndexError):
+                break
+
+            try:
+                if node.value < self.heap_list[node.right]:
+                    self._swap(node, self.heap_list[node.right])
+                    i = 0
+            except(IndexError):
+                break

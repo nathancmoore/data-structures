@@ -145,21 +145,19 @@ Again, the use of Bubble Sort drastically impacts O(n) for all methods as the Bi
 
 
 
-
-
 Priority Queue
 **************************
 The Priority Queue is abstract data type, meaning that we have used an existing Binary Heap to implement this
-data structure. It ranks incomming values according to a priority.
+data structure. It ranks incomming values according to a priority. Our PriorityQ class is composed of our BinHeap class and makes of use of a Node Class.
 
 It has the following methods.
 
 Big O is largely dependent upon a Binary Heap.
 
-_sort(): O(nlogn)
+sort(): As before: this is now a modification of Bubble Sort dramatically impacting all running time complexity of our priority queue. Any method that utilizes this method will have Big O value of O(k) + O(n^2). Any change to the heap must cause an additional sorting of the heap.
 
-push():
+push(): Adds new item to the priority queue and reorders based on priority --> this uses our sort method.
 
-pop():
+pop(): Returns and removes the most important item from the queue.
 
-peek():
+peek(): Returns the most important element without removal - therefore it does not use a sort() method, so it is O(1).

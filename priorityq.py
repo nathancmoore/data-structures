@@ -5,10 +5,10 @@ from binheap import BinHeap
 class Node(object):
     """Define Node-class objects."""
 
-    def __init__(self, index=None, value=None, priority=0):
+    def __init__(self, index=None, value_list=None):
         """Assign attributes to the Node object."""
         self.index = index
-        self.value = [value, priority]
+        self.value = value_list
         self.left = 2 * self.index + 1
         self.right = 2 * self.index + 2
 
@@ -42,10 +42,9 @@ class PriorityQ(BinHeap):
             except(IndexError):
                 break
 
-    def insert(self, index, value, priority=0):
+    def insert(self, value_list):
         """Insert new node based on priority."""
-        new_node = Node(index, value, priority)
-        self.heap_list.append(new_node)
+        self.push(value_list)
         self._sort()
 
     def pop(self):
@@ -57,4 +56,4 @@ class PriorityQ(BinHeap):
 
     def peek(self):
         """Return highest priority Node without removal."""
-        return self.heap_list[0]
+        return self.heap_list[0].value[0]

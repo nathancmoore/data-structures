@@ -42,15 +42,16 @@ class PriorityQ(BinHeap):
                 break
 
     def insert(self, value, priority=0):
-        """."""
-        self.binheap.push()
+        """Insert new node based on priority."""
 
-        return ""
+        new_node = Node(value, priority)
+
+        self.binheap.push(new_node)
 
     def pop(self):
-        """."""
-        return ""
+        """Return and remove highest priority Node."""
+        return self.pop()
 
     def peek(self):
-        """."""
-        return
+        """Return highest priority Node without removal."""
+        return self.heap_list[0]

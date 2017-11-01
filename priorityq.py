@@ -28,7 +28,6 @@ class PriorityQ(BinHeap):
         for i in range(len(self.heap_list)):
             node = self.heap_list[i]
             try:
-                print(node.value)
                 if node.value[1] < self.heap_list[node.left].value[1]:
                     self._swap(node, self.heap_list[node.left])
                     i = 0
@@ -49,11 +48,19 @@ class PriorityQ(BinHeap):
 
     def pop(self):
         """Return and remove highest priority Node."""
-        self._swap(self.heap_list[0], self.heap_list[-1])
-        popped = self.heap_list.pop().value[0]
-        self._sort()
-        return popped
+        try:
+            self._swap(self.heap_list[0], self.heap_list[-1])
+            popped = self.heap_list.pop().value[0]
+            self._sort()
+            return popped
+        except(IndexError):
+            print("Can't pop an empty queue!")
+            raise(IndexError)
 
     def peek(self):
         """Return highest priority Node without removal."""
-        return self.heap_list[0].value[0]
+        try:
+            return self.heap_list[0].value[0]
+        except(IndexError):
+            print("Can't peek at an empty queue!")
+            raise(IndexError)

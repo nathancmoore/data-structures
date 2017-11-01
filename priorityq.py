@@ -1,6 +1,7 @@
 """This is the class for a priority queue."""
 from binheap import BinHeap
 
+
 class Node(object):
     """Define Node-class objects."""
 
@@ -11,13 +12,18 @@ class Node(object):
         self.left = 2 * self.index + 1
         self.right = 2 * self.index + 2
 
-class PriorityQ(object):
+
+class PriorityQ(BinHeap):
     """Implementation of a Priority Queue using an existing binary heap."""
 
-    def __init__(self, val=None, priority=None):
-        self.val = val
-        self.binheap = BinHeap()
-        def self.binheap._sort(self):
+    def __init__(self, iterable=None):
+        """Assign the attributes of the PriorityQ Class object."""
+        self.heap_list = []
+
+        if iterable:
+            self.heap_list = iterable
+
+    def _sort(self):
         """Bubble sort the heap."""
         for i in range(len(self.heap_list)):
             node = self.heap_list[i]
@@ -37,7 +43,6 @@ class PriorityQ(object):
 
     def insert(self, value, priority=0):
         """."""
-
         self.binheap.push()
 
         return ""
@@ -49,10 +54,3 @@ class PriorityQ(object):
     def peek(self):
         """."""
         return
-
-
-
-priority []
-#pass priority to bin heap
-
-priorityq = binheap index of [val]

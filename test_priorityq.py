@@ -2,5 +2,4 @@
 
 import pytest
 
- """test comment."""
- """."""
+from priorityq import PriorityQ

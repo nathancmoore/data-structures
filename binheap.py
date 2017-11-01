@@ -41,7 +41,6 @@ class BinHeap(object):
         child.index = tmp
         self.heap_list[parent.index] = parent
         self.heap_list[child.index] = child
-        self._sort()
 
     def pop(self):
         """Return root node of Heap."""
@@ -55,14 +54,14 @@ class BinHeap(object):
         for i in range(len(self.heap_list)):
             node = self.heap_list[i]
             try:
-                if node.value < self.heap_list[node.left]:
+                if node.value < self.heap_list[node.left].value:
                     self._swap(node, self.heap_list[node.left])
                     i = 0
             except(IndexError):
                 break
 
             try:
-                if node.value < self.heap_list[node.right]:
+                if node.value < self.heap_list[node.right].value:
                     self._swap(node, self.heap_list[node.right])
                     i = 0
             except(IndexError):

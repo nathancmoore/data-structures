@@ -28,29 +28,32 @@ class PriorityQ(BinHeap):
         for i in range(len(self.heap_list)):
             node = self.heap_list[i]
             try:
-                if node.value[1] < self.heap_list[node.left][1]:
+                print(node.value)
+                if node.value[1] < self.heap_list[node.left].value[1]:
                     self._swap(node, self.heap_list[node.left])
                     i = 0
             except(IndexError):
                 break
 
             try:
-                if node.value[1] < self.heap_list[node.right][1]:
+                if node.value[1] < self.heap_list[node.right].value[1]:
                     self._swap(node, self.heap_list[node.right])
                     i = 0
             except(IndexError):
                 break
 
-    def insert(self, value, priority=0):
+    def insert(self, index, value, priority=0):
         """Insert new node based on priority."""
-
-        new_node = Node(value, priority)
-
-        self.binheap.push(new_node)
+        new_node = Node(index, value, priority)
+        self.heap_list.append(new_node)
+        self._sort()
 
     def pop(self):
         """Return and remove highest priority Node."""
-        return self.pop()
+        self._swap(self.heap_list[0], self.heap_list[-1])
+        popped = self.heap_list.pop().value[0]
+        self._sort()
+        return popped
 
     def peek(self):
         """Return highest priority Node without removal."""

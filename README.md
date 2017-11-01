@@ -102,3 +102,62 @@ Returns without removal the first element in the queue.
 
 Time Complexity.
 As before any insertion or deletion is O(1). Attempts to access the Queue are O(n).
+
+
+Deque
+*********************
+We have created a Deque class, which is a doubly-linked list which can be appended to or popped from either the right or left of the list.
+
+It has the following methods:
+
+size(): Measures the number of nodes in the deque, with a time complexity of O(n)
+
+pop(): removes and returns the tail node, with a time complexity of O(1)
+
+popleft(): removes and returns the head node, with a time complexity of O(1)
+
+append(): adds a new node to the tail of the list, with a time complexity of O(1)
+
+appendleft(): adds a new node to the head of the list, with a time complexity of O(1)
+
+peek(): returns the value of the tail of the list, with a time complexity of O(1)
+
+peekleft(): returns the value of the head of the the list, with a time complexity of O(1)
+
+
+Binary Heap
+**************************
+We have implemented a Max Binary Heap. We have utilized python's list class to accomplish this. A binary heap is tree with parent and child (left and right) nodes. Left and Right child nodes are defined by the following property respectively:
+
+2k + 1, 2k + 2
+
+Where k is equal to list index of the parent node. We implemented the following methods as instructed. The Binary Heap is sorted according to Maximum values that satisfy the above property.
+
+sort(): We have utilized the Bubble Sort algorithm to move nodes with highest value to the top of the heap. The use of the classic sorting algorithm drastically impacts our time complexity. Bubble Sort has a worst case of O(n^2). Any method that utilizes this method will have Big O value of O(k) + O(n^2). Any change to the heap must cause an additional sorting of the heap.
+
+swap(): any value of greater value is assigned as the parent node. 
+
+push(): Append value to the heap, then sort. 
+
+pop(): Return value of lowest index, then sort, finally return the popped node.
+
+Again, the use of Bubble Sort drastically impacts O(n) for all methods as the Binary heap must be sorted after each operation.
+
+
+
+Priority Queue
+**************************
+The Priority Queue is abstract data type, meaning that we have used an existing Binary Heap to implement this
+data structure. It ranks incomming values according to a priority. Our PriorityQ class is composed of our BinHeap class and makes of use of a Node Class.
+
+It has the following methods.
+
+Big O is largely dependent upon a Binary Heap.
+
+sort(): As before: this is now a modification of Bubble Sort dramatically impacting all running time complexity of our priority queue. Any method that utilizes this method will have Big O value of O(k) + O(n^2). Any change to the heap must cause an additional sorting of the heap.
+
+push(): Adds new item to the priority queue and reorders based on priority --> this uses our sort method.
+
+pop(): Returns and removes the most important item from the queue.
+
+peek(): Returns the most important element without removal - therefore it does not use a sort() method, so it is O(1).

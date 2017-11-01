@@ -19,12 +19,11 @@ class Node(object):
 class BinHeap(object):
     """Define the class of a max-Binary Heap."""
 
-    def __init__(self, root=None, iterable=()):
+    def __init__(self, iterable=None):
          """Initiate a new instance of a Binheap object with attributes."""
         self.heap_list = []
-        self.root = root
 
-        if isinstance(iterable, (str, tuple, list)):
+        if isinstance(iterable, list)):
             self.heap_list = iterable
 
     def push(self, val):
@@ -37,9 +36,9 @@ class BinHeap(object):
         tmp = parent.index
         parent.index = child.index
         child.index = tmp
-
         self.heap_list[parent.index] = parent
         self.heap_list[child.index] = child
+        self._sort()
 
     def pop():
         """Return root node of Heap."""

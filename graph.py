@@ -25,8 +25,9 @@ class Graph(object):
         self.node_dict[val1].append(val2)
         self.node_dict[val2].append(val1)
 
-    def del_node(node_key):
-        deleted = self.node_dict.pop(node_key)
+    def del_node(self, node_key):
+        """Delete a node and all edges connected to it from the graph."""
+        self.node_dict.pop(node_key)
         for key, value in self.node_dict.items():
             for i in value:
                 if i == node_key:

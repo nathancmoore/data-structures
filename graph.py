@@ -1,5 +1,10 @@
 """Class for Graph Implementation."""
 
+'''
+
+g = {'A': ['B', 'C'], 'B': ['A', 'E']}
+
+'''
 
 class Graph(object):
     """Class for graph and all methods."""
@@ -32,3 +37,8 @@ class Graph(object):
             for i in value:
                 if i == node_key:
                     value.remove(node_key)
+
+    def has_node(self, val):
+        """Return True if node is in node dictionary."""
+        return val in self.node_dict
+        

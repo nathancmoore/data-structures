@@ -22,8 +22,13 @@ class Graph(object):
 
     def add_edge(self, node_key1, node_key2):
         """Add edge between existing nodes."""
+        if node_key1 not in self.node_dict.keys():
+            self.add_node(node_key1)
+
+        if node_key2 not in self.node_dict.keys():
+            self.add_node(node_key2)
+
         self.node_dict[node_key1].append(node_key2)
-        self.node_dict[node_key2].append(node_key1)
 
     def del_node(self, node_key):
         """Delete a node and all edges connected to it from the graph."""
@@ -31,7 +36,7 @@ class Graph(object):
         for key, value in self.node_dict.items():
             for i in value:
                 if i == node_key:
-                    value.remove(node_key)
+                    self.del_edge(i, node_key)
 
     def has_node(self, node_key):
         """Return True if node is in node dictionary."""
@@ -52,3 +57,7 @@ class Graph(object):
     def has_adjacent(self, node_key1, node_key2):
         """Confirm or disconfirm that two nodes are neighbors."""
         return node_key1 in self.node_dict[node_key2] or node_key2 in self.node_dict[node_key1]
+
+    def del_edge(self, node_key, node_key2):
+        """Delete an edge between two given nodes."""
+        self.node_dict[node_key].remove(node_key2)

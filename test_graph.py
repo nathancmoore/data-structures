@@ -21,3 +21,20 @@ def test_add_node_increases_size(sample_graph):
     assert len(sample_graph.node_dict) == 1
     sample_graph.add_node("B")
     assert len(sample_graph.node_dict) == 2
+
+
+def test_add_node_makes_proper_node(sample_graph):
+    """Test that added nodes are properly-formed."""
+    sample_graph.add_node("A")
+    assert sample_graph.node_dict["A"] == []
+
+
+def test_add_edge_is_working(sample_graph):
+    """Test that the add_edge method isn't doing nothing."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "B")
+    assert sample_graph.node_dict["A"] == ["B"]
+    sample_graph.add_node("C")
+    sample_graph.add_edge("A", "C")
+    assert sample_graph.node_dict["A"] == ["B", "C"]

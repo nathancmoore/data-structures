@@ -1,12 +1,6 @@
 """Class for Graph Implementation."""
 
 
-class Node(object):
-    """Class for a graph node"""
-    def __init__(self, val=None, pointers=[]):
-        self.val = val
-        self.pointers = pointers
-
 class Graph(object):
     """Class for graph and all methods"""
     def __init__(self):
@@ -16,7 +10,6 @@ class Graph(object):
     def _form_edge_string(self, node1, node2):
         """Return formatted edges of graph."""
         return "{} --> {}".format(node1.val, node2.val) 
-
 
     def nodes(self):
         """Return all nodes in graph."""

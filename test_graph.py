@@ -1,0 +1,23 @@
+"""Various tests for Graph-class objects."""
+
+import pytest
+
+
+@pytest.fixture
+def sample_graph():
+    """Make a sample graph for testing."""
+    from graph import Graph
+    return Graph()
+
+
+def test_graph_object_exists(sample_graph):
+    """Test that the Graph class definition is working."""
+    assert sample_graph
+
+
+def test_add_node_increases_size(sample_graph):
+    """Test that the add_node method increases size of the dict."""
+    sample_graph.add_node("A")
+    assert len(sample_graph.node_dict) == 1
+    sample_graph.add_node("B")
+    assert len(sample_graph.node_dict) == 2

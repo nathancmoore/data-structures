@@ -1,0 +1,32 @@
+"""Class for Graph Implementation."""
+
+
+class Node(object):
+    """Class for a graph node"""
+    def __init__(self, val=None, pointers=[]):
+        self.val = val
+        self.pointers = pointers
+
+class Graph(object):
+    """Class for graph and all methods"""
+    def __init__(self):
+        """Constructor for Graph class."""
+        self.node_dict = {}
+
+    def _form_edge_string(self, node1, node2):
+        """Return formatted edges of graph."""
+        return "{} --> {}".format(node1.val, node2.val) 
+
+
+    def nodes(self):
+        """Return all nodes in graph."""
+        return self.node_dict.keys()
+
+    #def edges(self):
+        """Return all Edges in graph"""
+
+    def add_node(self, val):
+        """Add new node to graph."""
+        self.node_dict.setdefault(val, default_value=[])
+
+

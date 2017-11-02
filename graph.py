@@ -19,3 +19,8 @@ class Graph(object):
     def add_node(self, val):
         """Add new node to graph."""
         self.node_dict.setdefault(val, [])
+
+    def add_edge(self, val1, val2):
+        """Add edge between existing nodes."""
+        self.node_dict[val1].append(val2)
+        self.node_dict[val2].append(val1)

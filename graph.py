@@ -48,3 +48,7 @@ class Graph(object):
                         output.append(i)
 
         return output
+
+    def has_adjacent(self, node_key1, node_key2):
+        """Confirm or disconfirm that two nodes are neighbors."""
+        return node_key1 in self.node_dict[node_key2] or node_key2 in self.node_dict[node_key1]

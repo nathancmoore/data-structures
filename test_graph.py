@@ -62,3 +62,10 @@ def test_del_node_removes_edges(sample_graph):
     assert sample_graph.node_dict["A"] == ["B"]
     sample_graph.del_node("B")
     assert sample_graph.node_dict["A"] == []
+
+
+def test_has_node(sample_graph):
+    """Test that has_node method is working."""
+    assert not sample_graph.has_node("A")
+    sample_graph.add_node("A")
+    assert sample_graph.has_node("A")

@@ -69,3 +69,30 @@ def test_has_node(sample_graph):
     assert not sample_graph.has_node("A")
     sample_graph.add_node("A")
     assert sample_graph.has_node("A")
+
+
+def test_has_neighbors_true(sample_graph):
+    """Test that graph node has neighbors"""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    sample_graph.add_node("C")
+    sample_graph.add_edge("A", "B")
+    sample_graph.add_edge("A", "C")
+    assert sample_graph.has_neighbors("A") == ['B', 'C']
+
+def test_has_no_neighbors_false(sample_graph):
+    """Test that graph node has no neighbors"""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    sample_graph.add_node("C")
+    sample_graph.add_edge("A", "B")
+    assert sample_graph.has_neighbors("C") == []
+
+
+def test_has_neighbors_returns_error(sample_graph):
+    """Test that graph node has neighbors returns Error when node does not exist"""
+    sample_graph.add_node("A")
+    sample_graph.add_node("C")
+    sample_graph.add_edge("A", "C")
+    with pytest.raises(KeyError):
+        sample_graph.has_neighbors("B")

@@ -36,7 +36,7 @@ class Graph(object):
         for key, value in self.node_dict.items():
             for i in value:
                 if i == node_key:
-                    self.del_edge(i, node_key)
+                    self.del_edge(key, node_key)
 
     def has_node(self, node_key):
         """Return True if node is in node dictionary."""

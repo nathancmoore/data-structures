@@ -90,9 +90,49 @@ def test_has_no_neighbors_false(sample_graph):
 
 
 def test_has_neighbors_returns_error(sample_graph):
-    """Test that graph node has neighbors returns Error when node does not exist"""
+    """Test that graph node has neighbors returns Error when node does not exist."""
     sample_graph.add_node("A")
     sample_graph.add_node("C")
     sample_graph.add_edge("A", "C")
     with pytest.raises(KeyError):
         sample_graph.has_neighbors("B")
+
+
+def test_adjacent_returns_true_multiple_edges(sample_graph):
+    """Test if multiple edges between nodes exist."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "B")
+    sample_graph.add_edge("B", "A")
+    assert sample_graph.has_adjacent("A", "B")
+
+
+def test_adjacent_returns_true_one_edge(sample_graph):
+    """Test if one edge exists."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "B")
+    assert sample_graph.has_adjacent("A", "B")
+
+
+def test_has_adjacent_no_edges_returns_false(sample_graph):
+    """Test if nodes without edges returns false."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("B")
+    assert sample_graph.has_adjacent("A", "B") is False
+
+
+def test_has_adjacent_multi_edges_returns_false(sample_graph):
+    """Test if no nodes are has_adjacent if other edges exist."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("C")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "C")
+    sample_graph.add_edge("A", "B")
+    assert sample_graph.has_adjacent("B", "C") is False
+
+
+def test_if_node_has_adjacent_to_itself(sample_graph):
+    """Test node should not be has_adjacent to itself."""
+    sample_graph.add_node("A")
+    assert sample_graph.has_adjacent("A", "A") is False

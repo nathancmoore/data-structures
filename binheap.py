@@ -26,6 +26,14 @@ class BinHeap(object):
         """Initiate a new instance of a Binheap object with attributes."""
         self.heap_list = []
 
+        '''
+        try:
+            x = iter(x)
+        except TypeError:
+            print(x, 'is not iterable')
+        '''
+
+
         if iterable:
             self.heap_list = iterable
 
@@ -57,12 +65,12 @@ class BinHeap(object):
                 if node.value < self.heap_list[node.left].value:
                     self._swap(node, self.heap_list[node.left])
                     i = 0
-            except(IndexError):
+            except IndexError:
                 break
 
             try:
                 if node.value < self.heap_list[node.right].value:
                     self._swap(node, self.heap_list[node.right])
                     i = 0
-            except(IndexError):
+            except IndexError:
                 break

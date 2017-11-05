@@ -54,11 +54,19 @@ class Deque(object):
 
     def pop(self):
         """Remove and returns the tail node of the list."""
+
+        popped_node = None
+    
         try:
-            popped_node = self.tail
-            self.tail.prev_node.next_node = None
-            self.tail = self.tail.prev_node
-            return popped_node
+            if self.head and self.head == self.tail:
+                popped_node = self.head
+                self.head = None
+                return popped_node
+            else:
+                popped_node = self.tail
+                self.tail.prev_node.next_node = None
+                self.tail = self.tail.prev_node
+                return popped_node
 
         except:
             raise(IndexError)
@@ -86,3 +94,12 @@ class Deque(object):
             return None
         else:
             return self.head
+
+'''
+if __name__ == '__main__':
+    deque = Deque()
+    deque.append(1)
+    deque.pop()
+    print(deque.size())
+'''
+

@@ -57,6 +57,15 @@ def test_pop_on_empty():
         d.pop()
 
 
+def test_pop_one_element():
+    """Test pop after one element."""
+    from deque import Deque
+    d = Deque()
+    d.append(1)
+    d.pop()
+    assert d.size() == 0
+
+
 def test_popleft_on_empty():
     """Test that popleft-ing an empty list returns none."""
     from deque import Deque

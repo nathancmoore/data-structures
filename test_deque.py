@@ -62,8 +62,7 @@ def test_pop_one_element():
     from deque import Deque
     d = Deque()
     d.append(1)
-    d.pop()
-    assert d.size() == 0
+    assert d.pop() == 1
 
 
 def test_popleft_on_empty():
@@ -75,6 +74,13 @@ def test_popleft_on_empty():
         d.popleft()
 
 
+def test_popleft_one_element():
+    """Test popleft one element."""
+    from deque import Deque
+    d = Deque()
+    d.append(1)
+    assert d.popleft() == 1
+
 def test_peek_returns_after_pop():
     """Test that peek returns correct value after a pop."""
     from deque import Deque
@@ -83,7 +89,7 @@ def test_peek_returns_after_pop():
     d.append(6)
     d.append(7)
     d.pop()
-    assert d.peek().data == 6
+    assert d.peek() == 6
 
 
 def test_peek_returns_after_append():
@@ -93,7 +99,7 @@ def test_peek_returns_after_append():
     d.append(5)
     d.append(6)
     d.append(7)
-    assert d.peek().data == 7
+    assert d.peek() == 7
 
 
 def test_peek_returns_after_popleft():
@@ -104,7 +110,7 @@ def test_peek_returns_after_popleft():
     d.append(6)
     d.append(7)
     d.popleft()
-    assert d.peek().data == 7
+    assert d.peek() == 7
 
 
 def test_peek_returns_after_appendleft():
@@ -114,7 +120,7 @@ def test_peek_returns_after_appendleft():
     d.appendleft(5)
     d.appendleft(6)
     d.appendleft(7)
-    assert d.peek().data == 5
+    assert d.peek() == 5
 
 
 def test_peekleft_returns_after_pop():
@@ -125,7 +131,7 @@ def test_peekleft_returns_after_pop():
     d.appendleft(6)
     d.appendleft(7)
     d.pop()
-    assert d.peekleft().data == 7
+    assert d.peekleft() == 7
 
 
 def test_peekleft_returns_after_append():
@@ -135,7 +141,7 @@ def test_peekleft_returns_after_append():
     d.append(5)
     d.append(6)
     d.append(7)
-    assert d.peekleft().data == 5
+    assert d.peekleft() == 5
 
 
 def test_peek_returns_none_on_empty_list():

@@ -137,3 +137,36 @@ def test_if_node_has_adjacent_to_itself(sample_graph):
     """Test node should not be has_adjacent to itself."""
     sample_graph.add_node("A")
     assert sample_graph.has_adjacent("A", "A") is False
+
+
+def test_del_edge_one_edge(sample_graph):
+    """Test remove one edge."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("C")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "C")
+    sample_graph.del_edge("A", "C")
+    assert sample_graph.has_adjacent("A", "C") is False
+
+
+def test_del_edge_after_multi_edge_add(sample_graph):
+    """Test remove multiple edges."""
+    sample_graph.add_node("A")
+    sample_graph.add_node("C")
+    sample_graph.add_node("B")
+    sample_graph.add_edge("A", "C")
+    sample_graph.add_edge("A", "B")
+    sample_graph.add_edge("C", "B")
+    sample_graph.del_edge("A", "B")
+    sample_graph.del_edge("C", "B")
+    assert sample_graph.has_adjacent("A", "B") is False
+
+
+def test_del_edge_raise_error(sample_graph):
+    """Test Raise Error if no edges removed"""
+    sample_graph.add_node("A")
+    sample_graph.add_node("C")
+    sample_graph.add_node("B")
+    with pytest.raises(ValueError):
+        sample_graph.del_edge("A", "B")
+

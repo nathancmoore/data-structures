@@ -7,8 +7,8 @@ class Graph(object):
     def __init__(self, dict_=None):
         """Constructor for Graph class."""
         self.node_dict = {}
-
-        self.visited = []
+        self.visited_d = []
+        self.visited_b = []
 
         if dict_:
             self.node_dict = dict_
@@ -24,6 +24,8 @@ class Graph(object):
     def add_node(self, node_key):
         """Add new node to graph."""
         self.node_dict.setdefault(node_key, [])
+        self.visited_d = []
+        self.visited_b = []
 
     def add_edge(self, node_key1, node_key2):
         """Add edge between existing nodes."""
@@ -34,6 +36,8 @@ class Graph(object):
             self.add_node(node_key2)
 
         self.node_dict[node_key1].append(node_key2)
+        self.visited_d = []
+        self.visited_b = []
 
     def del_node(self, node_key):
         """Delete a node and all edges connected to it from the graph."""
@@ -42,6 +46,8 @@ class Graph(object):
             for i in value:
                 if i == node_key:
                     self.del_edge(i, node_key)
+        self.visited_d = []
+        self.visited_b = []
 
     def has_node(self, node_key):
         """Return True if node is in node dictionary."""
@@ -66,53 +72,45 @@ class Graph(object):
     def del_edge(self, node_key, node_key2):
         """Delete an edge between two given nodes."""
         self.node_dict[node_key].remove(node_key2)
+        self.visited_d = []
+        self.visited_b = []
 
     def depth_first_traversal(self, start_val):
         """Recursive Depth First Search Implementation."""
+        self.visited_d.append(start_val)
 
-        self.visited.append(start_val)
-       # print("START VAL", start_val)
         if len(self.node_dict[start_val]) > 0:
             for child in self.node_dict[start_val]:
-                   
-                if child not in self.visited:
+                if child not in self.visited_d:
                     self.depth_first_traversal(child)
-        #print(self.visited)
-        return self.visited
 
+        return self.visited_d
 
-        '''
-        self._traverse(start_val)
+    def breadth_first_traversal(self, start_val):
+        """Recursive Breadth First Search Implementation."""
+        self.visited_b.append(start_val)
 
-      
-        def _traverse(self, node_val):
-            """."""
-            visited.append(node_val)
-            if self.has_neighbors(node_val):
-                for child in self.node_dict[node_val]:
-                    if child not in visited:
-                        self._traverse(self.node_dict[child])
+        if len(self.node_dict[start_val]) > 0:
+            for child in self.node_dict[start_val]:
+                if child not in self.visited_b:
+                    self.visited_b.append(child)
+                    self.depth_first_traversal(child)
 
-        return visited
-        '''
+        return self.visited_b
+
 
 if __name__ == '__main__':
-    
+
     graph1 = {
-    'A' : ['B','S'],
-    'B' : ['A'],
-    'C' : ['D','E','F','S'],
-    'D' : ['C'],
-    'E' : ['C','H'],
-    'F' : ['C','G'],
-    'G' : ['F','S'],
-    'H' : ['E','G'],
-    'S' : ['A','C','G']
+        'A': ['B', 'S'],
+        'B': ['A'],
+        'C': ['D', 'E', 'F', 'S'],
+        'D': ['C'],
+        'E': ['C', 'H'],
+        'F': ['C', 'G'],
+        'G': ['F', 'S'],
+        'H': ['E', 'G'],
+        'S': ['A', 'C', 'G']
     }
 
     g = Graph(graph1)
-    
-    t = g.depth_first_traversal('A')
-    print(t)
-
-

@@ -61,3 +61,17 @@ class Graph(object):
     def del_edge(self, node_key, node_key2):
         """Delete an edge between two given nodes."""
         self.node_dict[node_key].remove(node_key2)
+
+    def depth_first_traversal(self, start_val):
+        """."""
+        visited = []
+
+        self._traverse(start_val)
+
+        def _traverse(self, node_val):
+            """."""
+            visited.append(node_val)
+            if self.has_neighbors(node_val):
+                for child in self.node_dict[node_val]:
+                    if child not in visited:
+                        self._traverse(self.node_dict[child])

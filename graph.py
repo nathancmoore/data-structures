@@ -88,29 +88,33 @@ class Graph(object):
 
     def breadth_first_traversal(self, start_val):
         """Recursive Breadth First Search Implementation."""
-        self.visited_b.append(start_val)
-
-        if len(self.node_dict[start_val]) > 0:
-            for child in self.node_dict[start_val]:
-                if child not in self.visited_b:
-                    self.visited_b.append(child)
-                    self.depth_first_traversal(child)
-
-        return self.visited_b
+        output = []
+        stack = [start_val]
+        while stack:
+            current = stack[0]
+            stack = stack[1:]
+            if current not in output:
+                output.append(current)
+            for child in self.node_dict[current]:
+                if child not in output:
+                    stack.append(child)
+        print(output)
+        return output
 
 
 if __name__ == '__main__':
 
     graph1 = {
-        'A': ['B', 'S'],
-        'B': ['A'],
-        'C': ['D', 'E', 'F', 'S'],
-        'D': ['C'],
-        'E': ['C', 'H'],
-        'F': ['C', 'G'],
-        'G': ['F', 'S'],
-        'H': ['E', 'G'],
-        'S': ['A', 'C', 'G']
+        'B': ['C', 'D'],
+        'C': ['X', 'Y', 'Z'],
+        'D': ['K', 'N'],
+        'N': ['A'],
+        'X': [],
+        'Y': [],
+        'Z': [],
+        'K': [],
+        'A': []
     }
 
     g = Graph(graph1)
+    g.breadth_first_traversal('B')

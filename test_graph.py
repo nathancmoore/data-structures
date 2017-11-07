@@ -2,10 +2,34 @@
 
 import pytest
 
+s1 = {
+    'B': ['C', 'D'],
+    'C': ['X', 'Y', 'Z'],
+    'D': ['K', 'N'],
+    'N': ['A'],
+    'X': [],
+    'Y': [],
+    'Z': [],
+    'K': [],
+    'A': []
+}
+
+s2 = {
+    'B': ['C', 'D'],
+    'C': ['X', 'Y', 'Z'],
+    'D': ['K', 'N'],
+    'N': ['A'],
+    'X': ['Y'],
+    'Y': ['A'],
+    'Z': [],
+    'K': [],
+    'A': ['K']
+}
 
 @pytest.fixture
 def sample_graph():
     """Make a sample graph for testing."""
+
     from graph import Graph
     return Graph()
 
@@ -49,19 +73,6 @@ def test_del_node_reduces_dict_size(sample_graph):
     assert len(sample_graph.node_dict) == 2
     sample_graph.del_node("B")
     assert len(sample_graph.node_dict) == 1
-
-
-def test_del_node_removes_edges(sample_graph):
-    """Test that the del_node method removes edges properly."""
-    sample_graph.add_node("A")
-    sample_graph.add_node("B")
-    sample_graph.add_node("C")
-    sample_graph.add_edge("A", "B")
-    sample_graph.add_edge("A", "C")
-    sample_graph.del_node("C")
-    assert sample_graph.node_dict["A"] == ["B"]
-    sample_graph.del_node("B")
-    assert sample_graph.node_dict["A"] == []
 
 
 def test_has_node(sample_graph):
@@ -136,3 +147,21 @@ def test_if_node_has_adjacent_to_itself(sample_graph):
     """Test node should not be has_adjacent to itself."""
     sample_graph.add_node("A")
     assert sample_graph.has_adjacent("A", "A") is False
+
+
+def test_dfs_one_node(sample_graph):
+    """Test one node search on dfs."""
+    sample_graph.add_node("A")
+    assert sample_graph.depth_first_traversal("A") == ["A"]
+
+def test_dfs_sample_graph_with_loops():
+    """Test graph with loop."""
+    from graph import Graph
+    sg = Graph(s2)
+    assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'Z', 'D', 'K', 'N', 'A']
+
+def test_dfs_sample_graph_no_loops():
+     from graph import Graph
+     sg = Graph(s1)
+     assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'Z', 'D', 'K', 'N', 'A']
+

@@ -4,9 +4,14 @@
 class Graph(object):
     """Class for graph and all methods."""
 
-    def __init__(self):
+    def __init__(self, dict_=None):
         """Constructor for Graph class."""
         self.node_dict = {}
+
+        self.visited = []
+
+        if dict_:
+            self.node_dict = dict_
 
     def _form_edge_string(self, node1, node2):
         """Return formatted edges of graph."""
@@ -63,11 +68,23 @@ class Graph(object):
         self.node_dict[node_key].remove(node_key2)
 
     def depth_first_traversal(self, start_val):
-        """."""
-        visited = []
+        """Recursive Depth First Search Implementation."""
 
+        self.visited.append(start_val)
+       # print("START VAL", start_val)
+        if len(self.node_dict[start_val]) > 0:
+            for child in self.node_dict[start_val]:
+                   
+                if child not in self.visited:
+                    self.depth_first_traversal(child)
+        #print(self.visited)
+        return self.visited
+
+
+        '''
         self._traverse(start_val)
 
+      
         def _traverse(self, node_val):
             """."""
             visited.append(node_val)
@@ -75,3 +92,27 @@ class Graph(object):
                 for child in self.node_dict[node_val]:
                     if child not in visited:
                         self._traverse(self.node_dict[child])
+
+        return visited
+        '''
+
+if __name__ == '__main__':
+    
+    graph1 = {
+    'A' : ['B','S'],
+    'B' : ['A'],
+    'C' : ['D','E','F','S'],
+    'D' : ['C'],
+    'E' : ['C','H'],
+    'F' : ['C','G'],
+    'G' : ['F','S'],
+    'H' : ['E','G'],
+    'S' : ['A','C','G']
+    }
+
+    g = Graph(graph1)
+    
+    t = g.depth_first_traversal('A')
+    print(t)
+
+

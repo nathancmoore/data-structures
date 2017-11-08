@@ -26,10 +26,10 @@ s2 = {
     'A': ['K']
 }
 
+
 @pytest.fixture
 def sample_graph():
     """Make a sample graph for testing."""
-
     from graph import Graph
     return Graph()
 
@@ -83,7 +83,7 @@ def test_has_node(sample_graph):
 
 
 def test_has_neighbors_true(sample_graph):
-    """Test that graph node has neighbors"""
+    """Test that graph node has neighbors."""
     sample_graph.add_node("A")
     sample_graph.add_node("B")
     sample_graph.add_node("C")
@@ -91,8 +91,9 @@ def test_has_neighbors_true(sample_graph):
     sample_graph.add_edge("A", "C")
     assert sample_graph.has_neighbors("A") == ['B', 'C']
 
+
 def test_has_no_neighbors_false(sample_graph):
-    """Test that graph node has no neighbors"""
+    """Test that graph node has no neighbors."""
     sample_graph.add_node("A")
     sample_graph.add_node("B")
     sample_graph.add_node("C")
@@ -154,14 +155,36 @@ def test_dfs_one_node(sample_graph):
     sample_graph.add_node("A")
     assert sample_graph.depth_first_traversal("A") == ["A"]
 
+
 def test_dfs_sample_graph_with_loops():
-    """Test graph with loop."""
+    """Test dfs on a graph with loops."""
     from graph import Graph
     sg = Graph(s2)
-    assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'Z', 'D', 'K', 'N', 'A']
+    assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'A', 'K', 'Z', 'D', 'N']
+
 
 def test_dfs_sample_graph_no_loops():
-     from graph import Graph
-     sg = Graph(s1)
-     assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'Z', 'D', 'K', 'N', 'A']
+    """Test dfs on a graph without loops."""
+    from graph import Graph
+    sg = Graph(s1)
+    assert sg.depth_first_traversal('B') == ['B', 'C', 'X', 'Y', 'Z', 'D', 'K', 'N', 'A']
 
+
+def test_bfs_one_node(sample_graph):
+    """Test one node search on bfs."""
+    sample_graph.add_node("A")
+    assert sample_graph.breadth_first_traversal("A") == ["A"]
+
+
+def test_bfs_sample_graph_with_loops():
+    """Test bfs on a graph with loops."""
+    from graph import Graph
+    sg = Graph(s2)
+    assert sg.breadth_first_traversal('B') == ['B', 'C', 'D', 'X', 'Y', 'Z', 'K', 'N', 'A']
+
+
+def test_bfs_sample_graph_no_loops():
+    """Test bfs on a graph without loops."""
+    from graph import Graph
+    sg = Graph(s1)
+    assert sg.breadth_first_traversal('B') == ['B', 'C', 'D', 'X', 'Y', 'Z', 'K', 'N', 'A']

@@ -98,13 +98,10 @@ class Graph(object):
             for child in self.node_dict[current]:
                 if child not in output:
                     stack.append(child)
-        print(output)
         return output
 
-
-if __name__ == '__main__':
-
-    graph1 = {
+if __name__ == "__main__":
+    s1 = {
         'B': ['C', 'D'],
         'C': ['X', 'Y', 'Z'],
         'D': ['K', 'N'],
@@ -116,5 +113,19 @@ if __name__ == '__main__':
         'A': []
     }
 
-    g = Graph(graph1)
-    g.breadth_first_traversal('B')
+    s2 = {
+        'B': ['C', 'D'],
+        'C': ['X', 'Y', 'Z'],
+        'D': ['K', 'N'],
+        'N': ['A'],
+        'X': ['Y'],
+        'Y': ['A'],
+        'Z': [],
+        'K': [],
+        'A': ['K']
+    }
+
+    g1 = Graph(s1)
+    print(g1.breadth_first_traversal('B'))
+    g2 = Graph(s2)
+    print(g2.breadth_first_traversal('B'))

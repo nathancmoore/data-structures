@@ -7,7 +7,7 @@ class Node(object):
     def __init__(self, data=None, next=None):
         """Initiate a new instance of a Node object with attributes."""
         self.data = data
-        self.next = next
+        self.next_node = next
 
 
 class LinkedList(object):
@@ -31,7 +31,7 @@ class LinkedList(object):
         count = 0
         while current_node:
             count += 1
-            current_node = current_node.next
+            current_node = current_node.next_node
         return count
 
     def push(self, val):
@@ -45,7 +45,7 @@ class LinkedList(object):
         while current_node:
             if current_node.data == val:
                 return current_node
-            current_node = current_node.next
+            current_node = current_node.next_node
         return None
 
     def remove(self, val):
@@ -55,13 +55,13 @@ class LinkedList(object):
         while current_node:
             if current_node.data == val:
                 if previous_node:
-                    previous_node.next = current_node.next
+                    previous_node.next_node = current_node.next_node
                     return None
                 else:
-                    self.head = current_node.next
+                    self.head = current_node.next_node
                     return None
             previous_node = current_node
-            current_node = current_node.next
+            current_node = current_node.next_node
         raise ValueError("Data not in list")
 
     def pop(self):
@@ -70,7 +70,7 @@ class LinkedList(object):
             raise IndexError("List is empty")
         else:
             popped_node = self.head
-            self.head = self.head.next
+            self.head = self.head.next_node
             return popped_node.data
 
     def display(self):
@@ -83,9 +83,9 @@ class LinkedList(object):
         current_node = self.head
 
         while current_node:
-            if current_node.next is None:
+            if current_node.next_node is None:
                 display_str += str(current_node.data) + ")"
                 return display_str
             else:
                 display_str += str(current_node.data) + ", "
-                current_node = current_node.next
+                current_node = current_node.next_node

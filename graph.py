@@ -1,5 +1,7 @@
 """Class for Graph Implementation."""
 
+from shortest import dijkstra
+
 
 class Graph(object):
     """Class for graph and all methods."""
@@ -77,6 +79,7 @@ class Graph(object):
 
     def depth_first_traversal(self, start_val):
         """Recursive Depth First Search Implementation."""
+        """Not sure if dijkstra goes here or not."""
         self.visited_d.append(start_val)
 
         if len(self.node_dict[start_val]) > 0:
@@ -88,6 +91,7 @@ class Graph(object):
 
     def breadth_first_traversal(self, start_val):
         """Recursive Breadth First Search Implementation."""
+        """Not sure if dijkstra goes here or not."""
         output = []
         stack = [start_val]
         while stack:

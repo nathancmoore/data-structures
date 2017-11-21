@@ -24,10 +24,10 @@ class BST(object):
         if starting_values is None:
             self.root = None
 
-        elif isinstance(starting_values, (list, str, tuple, set)):
-            self.root.val = starting_values[0]
+        elif isinstance(starting_values, (list, str, tuple)):
+            self.root = Node(starting_values[0])
             self.tree_size += 1
-            for i in len(starting_values) - 1:
+            for i in range(len(starting_values) - 1):
                 self.insert(starting_values[i + 1])
 
         else:
@@ -75,10 +75,10 @@ class BST(object):
             self.tree_size += 1
 
     def _find_home(self, node_to_add, node_to_check):
-        r""".
+        """.
 
-        Check if the node_to_add belongs on the left or right\
-         of the node_to_check, then place it there if that spot is empty,\
+        Check if the node_to_add belongs on the left or right
+         of the node_to_check, then place it there if that spot is empty,
           otherwise recur.
         """
         if node_to_add.val > node_to_check.val:
@@ -106,16 +106,20 @@ class BST(object):
         return bool(self.search(value))
 
     def _check_for_equivalence(self, value, node_to_check):
-        r""".
+        """.
 
-        Check if the value matches that of the node_to_check\
-         if it does, return true if it doesn't, go left or right
-         as appropriate and recur. If you reach a dead end, return false.\
+        Check if the value matches that of the node_to_check
+         if it does, return the node. If it doesn't, go left or right
+         as appropriate and recur. If you reach a dead end, return None.
         """
-        if value == node_to_check.val:
-            return node_to_check
+        try:
+            if value == node_to_check.val:
+                return node_to_check
 
-        elif value > node_to_check.val and node_to_check.right:
+        except AttributeError:
+            return None
+
+        if value > node_to_check.val and node_to_check.right:
             return self._check_for_equivalence(value, node_to_check.right)
 
         elif value < node_to_check.val and node_to_check.left:
@@ -125,6 +129,4 @@ class BST(object):
         """Return the depth of the BST."""
         if self.left_depth > self.right_depth:
             return self.left_depth
-        if self.left_depth < self.right_depth:
-            return self.right_depth
         return self.right_depth

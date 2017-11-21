@@ -17,7 +17,7 @@ class BST(object):
 
     def __init__(self, starting_values=None):
         """Constructor for the BST class."""
-        self.size = 0
+        self.tree_size = 0
         self.left_depth = 0
         self.right_depth = 0
 
@@ -26,7 +26,7 @@ class BST(object):
 
         elif isinstance(starting_values, (list, str, tuple, set)):
             self.root.val = starting_values[0]
-            self.size += 1
+            self.tree_size += 1
             for i in len(starting_values) - 1:
                 self.insert(starting_values[i + 1])
 
@@ -40,7 +40,7 @@ class BST(object):
 
     def size(self):
         """Return the current size of the BST."""
-        return self.size
+        return self.tree_size
 
     def insert(self, value):
         """Insert a new node into the BST, and adjust the balance."""
@@ -57,7 +57,7 @@ class BST(object):
                     self.root.right.depth = 1
                     if self.root.right.depth > self.right_depth:
                         self.right_depth = self.root.right.depth
-                    self.size += 1
+                    self.tree_size += 1
 
             elif new_node.val < self.root.val:
                 if self.root.left:
@@ -69,10 +69,10 @@ class BST(object):
                     self.root.left.depth = 1
                     if self.root.left.depth > self.left_depth:
                         self.left_depth = self.root.left.depth
-                    self.size += 1
+                    self.tree_size += 1
         else:
             self.root = new_node
-            self.size += 1
+            self.tree_size += 1
 
     def _find_home(self, node_to_add, node_to_check):
         r""".
@@ -87,7 +87,7 @@ class BST(object):
             else:
                 node_to_check.right = node_to_add
                 node_to_check.right.depth = node_to_check.depth + 1
-                self.size += 1
+                self.tree_size += 1
 
         elif node_to_add.val < node_to_check.val:
             if node_to_check.left:
@@ -95,7 +95,7 @@ class BST(object):
             else:
                 node_to_check.left = node_to_add
                 node_to_check.left.depth = node_to_check.depth + 1
-                self.size += 1
+                self.tree_size += 1
 
     def search(self, value):
         """If a value is in the BST, return its node."""

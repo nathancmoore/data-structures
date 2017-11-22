@@ -138,12 +138,12 @@ class BST(object):
         return self.right_depth
 
     def in_order(self):
-        """Perform an in-order traversal, yielding one Node value at a time."""
+        """Return a generator to perform an in-order traversal."""
         self.visited = []
-        gen = self._io_gen(self.root)
+        gen = self._in_order_gen(self.root)
         return gen
 
-    def _io_gen(self, root_node):
+    def _in_order_gen(self, root_node):
         """Recursive helper method for in-order traversal."""
         current = root_node
 
@@ -161,5 +161,59 @@ class BST(object):
                 if current.right.val not in self.visited:
                     current = current.right
                     continue
+
+            current = current.parent
+
+    def pre_order(self):
+        """Return a generator to perform an pre-order traversal."""
+        self.visited = []
+        gen = self._pre_order_gen(self.root)
+        return gen
+
+    def _pre_order_gen(self, root_node):
+        """Recursive helper method for pre-order traversal."""
+        current = root_node
+
+        while len(self.visited) < self.tree_size:
+            if current.val not in self.visited:
+                self.visited.append(current.val)
+                yield current.val
+
+            if current.left:
+                if current.left.val not in self.visited:
+                    current = current.left
+                    continue
+
+            if current.right:
+                if current.right.val not in self.visited:
+                    current = current.right
+                    continue
+
+            current = current.parent
+
+    def post_order(self):
+        """Return a generator to perform an post-order traversal."""
+        self.visited = []
+        gen = self._post_order_gen(self.root)
+        return gen
+
+    def _post_order_gen(self, root_node):
+        """Recursive helper method for post-order traversal."""
+        current = root_node
+
+        while len(self.visited) < self.tree_size:
+            if current.left:
+                if current.left.val not in self.visited:
+                    current = current.left
+                    continue
+
+            if current.right:
+                if current.right.val not in self.visited:
+                    current = current.right
+                    continue
+
+            if current.val not in self.visited:
+                self.visited.append(current.val)
+                yield current.val
 
             current = current.parent

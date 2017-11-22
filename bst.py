@@ -4,11 +4,12 @@
 class Node(object):
     """Define the Node-class object."""
 
-    def __init__(self, value, left=None, right=None):
+    def __init__(self, value, left=None, right=None, parent=None):
         """Constructor for the Node class."""
         self.val = value
         self.left = left
         self.right = right
+        self.parent = parent
         self.depth = 0
 
 
@@ -20,6 +21,7 @@ class BST(object):
         self.tree_size = 0
         self.left_depth = 0
         self.right_depth = 0
+        self.visited = []
 
         if starting_values is None:
             self.root = None
@@ -53,6 +55,7 @@ class BST(object):
                     if new_node.depth > self.right_depth:
                         self.right_depth = new_node.depth
                 else:
+                    new_node.parent = self.root
                     self.root.right = new_node
                     self.root.right.depth = 1
                     if self.root.right.depth > self.right_depth:
@@ -65,6 +68,7 @@ class BST(object):
                     if new_node.depth > self.left_depth:
                         self.left_depth = new_node.depth
                 else:
+                    new_node.parent = self.root
                     self.root.left = new_node
                     self.root.left.depth = 1
                     if self.root.left.depth > self.left_depth:
@@ -85,6 +89,7 @@ class BST(object):
             if node_to_check.right:
                 self._find_home(node_to_add, node_to_check.right)
             else:
+                node_to_add.parent = node_to_check
                 node_to_check.right = node_to_add
                 node_to_check.right.depth = node_to_check.depth + 1
                 self.tree_size += 1
@@ -93,6 +98,7 @@ class BST(object):
             if node_to_check.left:
                 self._find_home(node_to_add, node_to_check.left)
             else:
+                node_to_add.parent = node_to_check
                 node_to_check.left = node_to_add
                 node_to_check.left.depth = node_to_check.depth + 1
                 self.tree_size += 1
@@ -130,3 +136,30 @@ class BST(object):
         if self.left_depth > self.right_depth:
             return self.left_depth
         return self.right_depth
+
+    def in_order(self):
+        """Perform an in-order traversal, yielding one Node value at a time."""
+        self.visited = []
+        gen = self._io_gen(self.root)
+        return gen
+
+    def _io_gen(self, root_node):
+        """Recursive helper method for in-order traversal."""
+        current = root_node
+
+        while len(self.visited) < self.tree_size:
+            if current.left:
+                if current.left.val not in self.visited:
+                    current = current.left
+                    continue
+
+            if current.val not in self.visited:
+                self.visited.append(current.val)
+                yield current.val
+
+            if current.right:
+                if current.right.val not in self.visited:
+                    current = current.right
+                    continue
+
+            current = current.parent

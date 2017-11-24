@@ -133,4 +133,50 @@ def test_contains_not_found_returns_none(sample_bst):
 def test_in_order_errors_with_empty_tree(sample_bst):
     """Test that in_order raises an IndexError if the tree is empty."""
     with pytest.raises(IndexError):
-    assert found is False
+        sample_bst.in_order()
+
+
+def test_pre_order_errors_with_empty_tree(sample_bst):
+    """Test that pre_order raises an IndexError if the tree is empty."""
+    with pytest.raises(IndexError):
+        sample_bst.pre_order()
+
+
+def test_post_order_errors_with_empty_tree(sample_bst):
+    """Test that post_order raises an IndexError if the tree is empty."""
+    with pytest.raises(IndexError):
+        sample_bst.post_order()
+
+
+def test_breadth_first_errors_with_empty_tree(sample_bst):
+    """Test that breadth_first raises an IndexError if the tree is empty."""
+    with pytest.raises(IndexError):
+        sample_bst.breadth_first()
+
+
+def test_in_order_size_one(sample_bst):
+    """Check for the correct output of in_order on a tree of size 1."""
+    sample_bst.insert(1)
+    gen = sample_bst.in_order()
+    assert next(gen) == 1
+
+
+def test_pre_order_size_one(sample_bst):
+    """Check for the correct output of pre_order on a tree of size 1."""
+    sample_bst.insert(1)
+    gen = sample_bst.pre_order()
+    assert next(gen) == 1
+
+
+def test_post_order_size_one(sample_bst):
+    """Check for the correct output of post_order on a tree of size 1."""
+    sample_bst.insert(1)
+    gen = sample_bst.post_order()
+    assert next(gen) == 1
+
+
+def test_breadth_first_size_one(sample_bst):
+    """Check for the correct output of breadth_first on a tree of size 1."""
+    sample_bst.insert(1)
+    gen = sample_bst.breadth_first()
+    assert next(gen) == 1

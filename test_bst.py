@@ -1,6 +1,7 @@
 """Various tests for the Binary Search Tree."""
 
 import pytest
+from bst import BST
 
 
 @pytest.fixture
@@ -180,3 +181,129 @@ def test_breadth_first_size_one(sample_bst):
     sample_bst.insert(1)
     gen = sample_bst.breadth_first()
     assert next(gen) == 1
+
+LEFT_IMBALANCED = [6, 5, 4, 3, 2, 1]
+
+
+def test_in_order_left_imba():
+    """Check for the correct output of iot on a left-imbalanced tree."""
+    tree = BST(LEFT_IMBALANCED)
+    gen = tree.in_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [1, 2, 3, 4, 5, 6]
+
+
+def test_pre_order_left_imba():
+    """Check for the correct output of preo-t on a left-imbalanced tree."""
+    tree = BST(LEFT_IMBALANCED)
+    gen = tree.pre_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [6, 5, 4, 3, 2, 1]
+
+
+def test_post_order_left_imba():
+    """Check for the correct output of posto-t on a left-imbalanced tree."""
+    tree = BST(LEFT_IMBALANCED)
+    gen = tree.post_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [1, 2, 3, 4, 5, 6]
+
+
+def test_breadth_first_left_imba():
+    """Check for the correct output of bft on a left-imbalanced tree."""
+    tree = BST(LEFT_IMBALANCED)
+    gen = tree.breadth_first()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [6, 5, 4, 3, 2, 1]
+
+RIGHT_IMBALANCED = [1, 2, 3, 4, 5, 6]
+
+
+def test_in_order_right_imba():
+    """Check for the correct output of iot on a right-imbalanced tree."""
+    tree = BST(RIGHT_IMBALANCED)
+    gen = tree.in_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [1, 2, 3, 4, 5, 6]
+
+
+def test_pre_order_right_imba():
+    """Check for the correct output of preo-t on a right-imbalanced tree."""
+    tree = BST(RIGHT_IMBALANCED)
+    gen = tree.pre_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [1, 2, 3, 4, 5, 6]
+
+
+def test_post_order_right_imba():
+    """Check for the correct output of posto-t on a right-imbalanced tree."""
+    tree = BST(RIGHT_IMBALANCED)
+    gen = tree.post_order()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [6, 5, 4, 3, 2, 1]
+
+
+def test_breadth_first_right_imba():
+    """Check for the correct output of bft on a right-imbalanced tree."""
+    tree = BST(RIGHT_IMBALANCED)
+    gen = tree.breadth_first()
+    output = []
+    for i in range(6):
+        output.append(next(gen))
+    assert output == [1, 2, 3, 4, 5, 6]
+
+SAMPLE_TREE = [20, 12, 10, 1, 11, 16, 30, 42, 28, 27]
+
+
+def test_in_order_sample_tree():
+    """Check for the correct output of iot on a sample tree."""
+    tree = BST(SAMPLE_TREE)
+    gen = tree.in_order()
+    output = []
+    for i in range(10):
+        output.append(next(gen))
+    assert output == [1, 10, 11, 12, 16, 20, 27, 28, 30, 42]
+
+
+def test_pre_order_sample_tree():
+    """Check for the correct output of preo-t on a sample tree."""
+    tree = BST(SAMPLE_TREE)
+    gen = tree.pre_order()
+    output = []
+    for i in range(10):
+        output.append(next(gen))
+    assert output == [20, 12, 10, 1, 11, 16, 30, 28, 27, 42]
+
+
+def test_post_order_sample_tree():
+    """Check for the correct output of posto-t on a sample tree."""
+    tree = BST(SAMPLE_TREE)
+    gen = tree.post_order()
+    output = []
+    for i in range(10):
+        output.append(next(gen))
+    assert output == [1, 11, 10, 16, 12, 27, 28, 42, 30, 20]
+
+
+def test_breadth_first_sample_tree():
+    """Check for the correct output of bft on a right-imbalanced tree."""
+    tree = BST(SAMPLE_TREE)
+    gen = tree.breadth_first()
+    output = []
+    for i in range(10):
+        output.append(next(gen))
+    assert output == [20, 12, 30, 10, 16, 28, 42, 1, 11, 27]

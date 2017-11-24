@@ -128,3 +128,9 @@ def test_contains_not_found_returns_none(sample_bst):
     sample_bst.insert(3)
     found = sample_bst.contains(4)
     assert found is False
+
+
+def test_in_order_errors_with_empty_tree(sample_bst):
+    """Test that in_order raises an IndexError if the tree is empty."""
+    with pytest.raises(IndexError):
+    assert found is False

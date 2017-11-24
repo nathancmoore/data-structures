@@ -140,12 +140,16 @@ class BST(object):
     def in_order(self):
         """Return a generator to perform an in-order traversal."""
         self.visited = []
-        gen = self._in_order_gen(self.root)
+
+        if self.root is None:
+            raise IndexError("Tree is empty!")
+
+        gen = self._in_order_gen()
         return gen
 
-    def _in_order_gen(self, root_node):
+    def _in_order_gen(self):
         """Recursive helper method for in-order traversal."""
-        current = root_node
+        current = self.root
 
         while len(self.visited) < self.tree_size:
             if current.left:
@@ -167,12 +171,16 @@ class BST(object):
     def pre_order(self):
         """Return a generator to perform an pre-order traversal."""
         self.visited = []
-        gen = self._pre_order_gen(self.root)
+
+        if self.root is None:
+            raise IndexError("Tree is empty!")
+
+        gen = self._pre_order_gen()
         return gen
 
-    def _pre_order_gen(self, root_node):
+    def _pre_order_gen(self):
         """Recursive helper method for pre-order traversal."""
-        current = root_node
+        current = self.root
 
         while len(self.visited) < self.tree_size:
             if current.val not in self.visited:
@@ -194,12 +202,16 @@ class BST(object):
     def post_order(self):
         """Return a generator to perform an post-order traversal."""
         self.visited = []
-        gen = self._post_order_gen(self.root)
+
+        if self.root is None:
+            raise IndexError("Tree is empty!")
+
+        gen = self._post_order_gen()
         return gen
 
-    def _post_order_gen(self, root_node):
+    def _post_order_gen(self):
         """Recursive helper method for post-order traversal."""
-        current = root_node
+        current = self.root
 
         while len(self.visited) < self.tree_size:
             if current.left:
@@ -217,3 +229,32 @@ class BST(object):
                 yield current.val
 
             current = current.parent
+
+    def breadth_first(self):
+        """Return a generator to perform a breadth-first traversal."""
+        self.visited = []
+
+        if self.root is None:
+            raise IndexError("Tree is empty!")
+
+        gen = self._breadth_first_gen(self.root)
+        return gen
+
+    def _breadth_first_gen(self, root_node):
+        """Helper generator for breadth-first traversal."""
+        queue = [self.root]
+        while queue:
+            current = queue[0]
+            yield current.val
+            queue = queue[1:]
+
+            if current not in self.visited:
+                self.visited.append(current)
+
+            if current.left:
+                if current.left not in self.visited:
+                    queue.append(current.left)
+
+            if current.right:
+                if current.right not in self.visited:
+                    queue.append(current.right)

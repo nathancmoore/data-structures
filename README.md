@@ -161,3 +161,27 @@ push(): Adds new item to the priority queue and reorders based on priority --> t
 pop(): Returns and removes the most important item from the queue.
 
 peek(): Returns the most important element without removal - therefore it does not use a sort() method, so it is O(1).
+
+Binary Search Tree
+**************************
+The binary search tree data structure is based on each node having up to two children (thus, binary) with each child being placed on either the right or the left of its parent based on whether it is higher or lower in value, respectively. My implementation of it depends on a well-defined Node class and BST class. The BST is also concerned with it's balance, meaning a comparison of the depth of the right and left branches of the tree.
+
+It has the following methods.
+
+balance() - returns the difference between the right_depth and left_depth attributes of the BST. Time Complexity: O(1)
+
+size() - returns the value of the tree_size attribute of the BST. Time Complexity O(1)
+
+insert(value) - The insert method begins the process of placing a new node into the tree by checking if the value of the new node is smaller or larger than that of the root node (and thus, whether we go left or go right on the tree.) It also handles cases where there is no root node yet. It then calls the recursive _find_home method which moves through the branches of the tree to find where the new node goes. The time complexity of insert in and of itself is O(1), but because it calls the _find home method, it's time complexity at best is O(logN) and at worst is O(N).
+
+_find_home(node1, node2) - this recursive method compares the value of the node to be added to the node it is checking against. if the value of the new node is either smaller or larger than the value of the node to check, it checks for the existence of a child node to the left or right of the node to check, respectively. If none exists, it places the node in that spot, sets the parents and depth value of the new node according to its parent node, and then adjusts those values for the total tree. If the two values are equal, it does nothing, because duplicate values are not allowed in my binary search tree. The time complexity of each recursion of _find_home is O(1), but because it's recursive, actually finding the home of the new node is O(logN) in the best case and O(N) in the worst case.
+
+search(value) the search method uses the _check_for_equivalence method to see if a given value is in the tree. If it is, it returns the node with that value. If it isn't it returns None. Its time complexity varies between O(logN) and O(N).
+
+contains(value) the contains method uses the _check_for_equivalence method to see if a given value is in the tree. If it is, it returns True. If it isn't it returns False. Its time complexity varies between O(logN) and O(N).
+
+_check_for_equivalence(value, node) - the _check_for_equivalence method recursively searches the tree for a given value, returns the Node if it finds it and returns none if it doesn't. Its time complexity varies between O(logN) and O(N).
+
+depth() - the depth method returns the value of whichever tree attribute is higher: left_depth or right_depth. Its time complexity is O(1).
+
+in_order(), pre_order(), post_order(), breadth_first() - each of these methods first empties the tree's visited list, then returns a generator which traverses the tree, one node a time, yielding the value at the next node, as well as appending it to the visited list. Each iteration of the generator varies between O(1) and O(N), thus traversing the entire tree varies between O(N) and O(N^2).

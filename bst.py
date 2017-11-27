@@ -258,3 +258,19 @@ class BST(object):
             if current.right:
                 if current.right not in self.visited:
                     queue.append(current.right)
+
+
+if __name__ == '__main__':  # pragma: no cover
+    import time
+
+    l_imba = BST([6, 5, 4, 3, 2, 1])
+    r_imba = BST([1, 2, 3, 4, 5, 6])
+    sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
+
+    l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
+    r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
+    sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
+
+    print('Left-Skewed Search Time: ', l_imba)
+    print('Right-Skewed Search Time: ', r_imba)
+    print('Balanced Search Time: ', sample_tree)

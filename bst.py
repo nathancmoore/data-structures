@@ -322,7 +322,11 @@ class BST(object):
             return
         else:
             if is_root:
-                pass
+                node.right.parent = None
+                self.root = node.right
+                self.root.depth = 0
+                self.right_depth = self._reassess_depths(self.root.right)
+                return
 
     def _reassess_depths(self, starting_node):
         """Update the depth of each node below the change and the tree."""
@@ -341,6 +345,30 @@ class BST(object):
 
         if node.right:
             self._pre_order_depth_reassignment(node.right)
+
+    def _locate_replacement_node(self, starting_node):
+        """Return the lowest-valued node on the right side of the sub-tree."""
+        if starting_node.right:
+            current = starting_node.right
+            while current.left:
+                current = current.left
+            return current
+
+    def _rotate_left(self, pivot_node, outer_node):
+        """Rotate the outer_node leftwards around the pivot_node."""
+        outer_node.right = pivot_node.left
+        pivot_node.parent = outer_node.parent
+        outer_node.parent = pivot_node
+        pivot_node.left = outer_node
+        outer_node.right = None
+
+    def _rotate_right(self, pivot_node, outer_node):
+        """Rotate the outer_node rightwards around the pivot_node."""
+        outer_node.parent.right = pivot_node
+        pivot_node.parent = outer_node.parent
+        pivot_node.right = outer_node
+        outer_node.parent = pivot_node
+        outer_node.left = None
 
 
 if __name__ == '__main__':  # pragma: no cover

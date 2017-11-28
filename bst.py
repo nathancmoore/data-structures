@@ -22,6 +22,7 @@ class BST(object):
         self.left_depth = 0
         self.right_depth = 0
         self.visited = []
+        self.max_depth_reached = 0
 
         if starting_values is None:
             self.root = None
@@ -259,9 +260,91 @@ class BST(object):
                 if current.right not in self.visited:
                     queue.append(current.right)
 
+    def delete(self, val):
+        """Delete the node with the given value from the tree."""
+        node = self.search(val)
+        if node is None:
+            return
+
+        self.tree_size -= 1
+        is_root = node == self.root
+        first_move_right = val > self.root.val
+        last_move_right = node == node.parent.right
+
+        if node.left is None and node.right is None:
+            if is_root:
+                self.root = None
+                return
+            if last_move_right:
+                node.parent.right = None
+                return
+            node.parent.left = None
+            return
+
+        if node.left is None:
+            if is_root:
+                node.right.parent = None
+                self.root = node.right
+                self.root.depth = 0
+                self.right_depth = self._reassess_depths(self.root.right)
+                return
+            if last_move_right:
+                node.parent.right = node.right
+                node.right.parent = node.parent
+
+            else:
+                node.parent.left = node.right
+                node.right.parent = node.parent
+
+            if first_move_right:
+                self.right_depth = self._reassess_depths(node.right)
+                return
+            self.left_depth = self._reassess_depths(node.right)
+            return
+
+        if node.right is None:
+            if is_root:
+                node.left.parent = None
+                self.root = node.left
+                self.root.depth = 0
+                self.left_depth = self._reassess_depths(self.root.left)
+                return
+            if last_move_right:
+                node.parent.right = node.left
+                node.left.parent = node.parent
+
+            node.parent.left = node.left
+            node.left.parent = node.parent
+            if first_move_right:
+                    self.right_depth = self._reassess_depths(node.left)
+                    return
+            self.left_depth = self._reassess_depths(node.left)
+            return
+        else:
+            if is_root:
+                pass
+
+    def _reassess_depths(self, starting_node):
+        """Update the depth of each node below the change and the tree."""
+        self.max_depth = 0
+        self._pre_order_depth_reassignment(starting_node)
+        return self.max_depth
+
+    def _pre_order_depth_reassignment(self, node):
+        """Recursive helper method for pre-order depth re-assignment."""
+        node.depth = node.parent.depth + 1
+        if node.depth > self.max_depth:
+            self.max_depth = node.depth
+
+        if node.left:
+            self._pre_order_depth_reassignment(node.left)
+
+        if node.right:
+            self._pre_order_depth_reassignment(node.right)
+
 
 if __name__ == '__main__':  # pragma: no cover
-    import time
+    import timeit as time
 
     l_imba = BST([6, 5, 4, 3, 2, 1])
     r_imba = BST([1, 2, 3, 4, 5, 6])

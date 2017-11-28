@@ -354,34 +354,56 @@ class BST(object):
                 current = current.left
             return current
 
-    def _rotate_left(self, pivot_node, outer_node):
-        """Rotate the outer_node leftwards around the pivot_node."""
-        outer_node.right = pivot_node.left
-        pivot_node.parent = outer_node.parent
-        outer_node.parent = pivot_node
-        pivot_node.left = outer_node
-        outer_node.right = None
+    def _rotate_left(self, node):
+        """Rotate a node leftwards around its right child."""
+        pivot_node = node.right
 
-    def _rotate_right(self, pivot_node, outer_node):
-        """Rotate the outer_node rightwards around the pivot_node."""
-        outer_node.parent.right = pivot_node
-        pivot_node.parent = outer_node.parent
-        pivot_node.right = outer_node
-        outer_node.parent = pivot_node
-        outer_node.left = None
+        if node.parent:
+            node.parent.left = pivot_node
+
+        else:
+            self.root = pivot_node
+
+        pivot_node.parent = node.parent
+        node.parent = pivot_node
+
+        if pivot_node.left:
+            pivot_node.left.parent = node
+
+        node.right = pivot_node.left
+        pivot_node.left = node
+
+    def _rotate_right(self, node):
+        """Rotate a node rightwards around its left child."""
+        pivot_node = node.left
+
+        if node.parent:
+            node.parent.right = pivot_node
+
+        else:
+            self.root = pivot_node
+
+        pivot_node.parent = node.parent
+        node.parent = pivot_node
+
+        if pivot_node.right:
+            pivot_node.right.parent = node
+
+        node.left = pivot_node.right
+        pivot_node.right = node
 
 
-if __name__ == '__main__':  # pragma: no cover
-    import timeit as time
+# if __name__ == '__main__':  # pragma: no cover
+#     import timeit as time
 
-    l_imba = BST([6, 5, 4, 3, 2, 1])
-    r_imba = BST([1, 2, 3, 4, 5, 6])
-    sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
+#     l_imba = BST([6, 5, 4, 3, 2, 1])
+#     r_imba = BST([1, 2, 3, 4, 5, 6])
+#     sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
 
-    l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
-    r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
-    sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
+#     l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
+#     r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
+#     sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
 
-    print('Left-Skewed Search Time: ', l_imba)
-    print('Right-Skewed Search Time: ', r_imba)
-    print('Balanced Search Time: ', sample_tree)
+#     print('Left-Skewed Search Time: ', l_imba)
+#     print('Right-Skewed Search Time: ', r_imba)
+#     print('Balanced Search Time: ', sample_tree)

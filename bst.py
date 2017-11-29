@@ -42,9 +42,16 @@ class BST(object):
         if not starting_node:
             return self.right_depth - self.left_depth
 
-        r_depth = self._reassess_depths(starting_node.right)
-        l_depth = self._reassess_depths(starting_node.left)
+        r_depth = 0
+        l_depth = 0
 
+        if starting_node.right:
+            r_depth += self._reassess_depths(starting_node.right)
+
+        if starting_node.left:
+            l_depth += self._reassess_depths(starting_node.left)
+
+        print("balance of node {} is {}!".format(starting_node.val, (r_depth - l_depth)))
         return r_depth - l_depth
 
     def size(self):
@@ -54,6 +61,7 @@ class BST(object):
     def insert(self, value):
         """Insert a new node into the BST, and adjust the balance."""
         new_node = Node(value)
+        self.tree_size += 1
 
         if self.root:
             if new_node.val > self.root.val:
@@ -67,7 +75,6 @@ class BST(object):
                     self.root.right.depth = 1
                     if self.root.right.depth > self.right_depth:
                         self.right_depth = self.root.right.depth
-                    self.tree_size += 1
 
             elif new_node.val < self.root.val:
                 if self.root.left:
@@ -80,10 +87,9 @@ class BST(object):
                     self.root.left.depth = 1
                     if self.root.left.depth > self.left_depth:
                         self.left_depth = self.root.left.depth
-                    self.tree_size += 1
+
         else:
             self.root = new_node
-            self.tree_size += 1
 
     def _find_home(self, node_to_add, node_to_check):
         """.
@@ -99,7 +105,7 @@ class BST(object):
                 node_to_add.parent = node_to_check
                 node_to_check.right = node_to_add
                 node_to_check.right.depth = node_to_check.depth + 1
-                self.tree_size += 1
+                self._rebalance(node_to_add.parent)
 
         elif node_to_add.val < node_to_check.val:
             if node_to_check.left:
@@ -108,7 +114,7 @@ class BST(object):
                 node_to_add.parent = node_to_check
                 node_to_check.left = node_to_add
                 node_to_check.left.depth = node_to_check.depth + 1
-                self.tree_size += 1
+                self._rebalance(node_to_add.parent)
 
     def search(self, value):
         """If a value is in the BST, return its node."""
@@ -355,20 +361,30 @@ class BST(object):
     def _reassess_depths(self, starting_node):
         """Fix the depth of nodes below the starting_node an return the max_depth."""
         self.max_depth = 0
-        self._pre_order_depth_reassignment(starting_node)
-        return self.max_depth
 
-    def _pre_order_depth_reassignment(self, node):
-        """Recursive helper method for pre-order depth re-assignment."""
-        node.depth = node.parent.depth + 1
-        if node.depth > self.max_depth:
-            self.max_depth = node.depth
+        if starting_node:
+            # self._pre_order_depth_reassignment(starting_node)
+            self.visited = []
+            queue = [starting_node]
+            while queue:
+                current = queue[0]
+                current.depth = current.parent.depth + 1
+                if current.depth > self.max_depth:
+                    self.max_depth = current.depth
+                queue = queue[1:]
 
-        if node.left:
-            self._pre_order_depth_reassignment(node.left)
+                if current not in self.visited:
+                    self.visited.append(current)
 
-        if node.right:
-            self._pre_order_depth_reassignment(node.right)
+                if current.left:
+                    if current.left not in self.visited:
+                        queue.append(current.left)
+
+                if current.right:
+                    if current.right not in self.visited:
+                        queue.append(current.right)
+
+        return self.max_depth - starting_node.depth
 
     def _locate_replacement_node(self, starting_node):
         """Return the lowest-valued node on the right side of the sub-tree."""
@@ -379,9 +395,34 @@ class BST(object):
 
     def _rebalance(self, node):
         """Rebalance a subtree, and if its root has a parent, recur on it."""
+        node_balance = self.balance(node)
+
+        if node_balance == 2:
+            child_balance = self.balance(node.right)
+
+            if child_balance == 1:
+                self._rotate_left(node)
+
+            if child_balance == -1:
+                self._rotate_right(node.right)
+                self._rotate_left(node)
+
+        if node_balance == -2:
+            child_balance = self.balance(node.left)
+
+            if child_balance == 1:
+                self._rotate_left(node.left)
+                self._rotate_right(node)
+
+            if child_balance == -1:
+                self._rotate_right(node)
+
+        if node.parent:
+            self._rebalance(node.parent)
 
     def _rotate_left(self, node):
         """Rotate a node leftwards around its right child."""
+        print("left!")
         pivot_node = node.right
 
         if node.parent:
@@ -401,6 +442,7 @@ class BST(object):
 
     def _rotate_right(self, node):
         """Rotate a node rightwards around its left child."""
+        print("right!")
         pivot_node = node.left
 
         if node.parent:
@@ -419,17 +461,17 @@ class BST(object):
         pivot_node.right = node
 
 
-if __name__ == '__main__':  # pragma: no cover
-    import timeit as time
+# if __name__ == '__main__':  # pragma: no cover
+#     import timeit as time
 
-    l_imba = BST([6, 5, 4, 3, 2, 1])
-    r_imba = BST([1, 2, 3, 4, 5, 6])
-    sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
+#     l_imba = BST([6, 5, 4, 3, 2, 1])
+#     r_imba = BST([1, 2, 3, 4, 5, 6])
+#     sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
 
-    l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
-    r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
-    sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
+#     l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
+#     r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
+#     sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
 
-    print('Left-Skewed Search Time: ', l_imba)
-    print('Right-Skewed Search Time: ', r_imba)
-    print('Balanced Search Time: ', sample_tree)
+#     print('Left-Skewed Search Time: ', l_imba)
+#     print('Right-Skewed Search Time: ', r_imba)
+#     print('Balanced Search Time: ', sample_tree)

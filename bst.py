@@ -51,7 +51,6 @@ class BST(object):
         if starting_node.left:
             l_depth += self._reassess_depths(starting_node.left)
 
-        print("balance of node {} is {}!".format(starting_node.val, (r_depth - l_depth)))
         return r_depth - l_depth
 
     def size(self):
@@ -290,8 +289,10 @@ class BST(object):
                 return
             if last_move_right:
                 node.parent.right = None
+                self._rebalance(node.parent)
                 return
             node.parent.left = None
+            self._rebalance(node.parent)
             return
 
         if node.left is None:
@@ -311,8 +312,10 @@ class BST(object):
 
             if first_move_right:
                 self.right_depth = self._reassess_depths(node.right)
+                self._rebalance(node.parent)
                 return
             self.left_depth = self._reassess_depths(node.right)
+            self._rebalance(node.parent)
             return
 
         if node.right is None:
@@ -330,8 +333,10 @@ class BST(object):
             node.left.parent = node.parent
             if first_move_right:
                     self.right_depth = self._reassess_depths(node.left)
+                    self._rebalance(node.parent)
                     return
             self.left_depth = self._reassess_depths(node.left)
+            self._rebalance(node.parent)
             return
         else:
             replacement_node = self._locate_replacement_node(node)
@@ -356,6 +361,8 @@ class BST(object):
             else:
                 self.left_depth = self._reassess_depths(self.root.left)
 
+            if node.parent:
+                self._rebalance(node.parent)
             return
 
     def _reassess_depths(self, starting_node):
@@ -363,7 +370,6 @@ class BST(object):
         self.max_depth = 0
 
         if starting_node:
-            # self._pre_order_depth_reassignment(starting_node)
             self.visited = []
             queue = [starting_node]
             while queue:
@@ -384,7 +390,7 @@ class BST(object):
                     if current.right not in self.visited:
                         queue.append(current.right)
 
-        return self.max_depth - starting_node.depth
+        return self.max_depth - starting_node.parent.depth
 
     def _locate_replacement_node(self, starting_node):
         """Return the lowest-valued node on the right side of the sub-tree."""
@@ -422,7 +428,6 @@ class BST(object):
 
     def _rotate_left(self, node):
         """Rotate a node leftwards around its right child."""
-        print("left!")
         pivot_node = node.right
 
         if node.parent:
@@ -442,7 +447,6 @@ class BST(object):
 
     def _rotate_right(self, node):
         """Rotate a node rightwards around its left child."""
-        print("right!")
         pivot_node = node.left
 
         if node.parent:

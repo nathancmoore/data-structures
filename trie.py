@@ -4,10 +4,11 @@
 class Node(object):
     """Definition of the Node class."""
 
-    def __init__(self, parent, val='$')
-    self.parent = parent
-    self.val = val
-    self.children = {}
+    def __init__(self, parent, val='$'):
+        """Constructor for the Node class."""
+        self.parent = parent
+        self.val = val
+        self.children = {}
 
 
 class Trie(object):
@@ -40,6 +41,8 @@ class Trie(object):
         if type(word) is not str:
             raise TypeError('Only strings are valid inputs!')
 
+        self.size += 1
+
         current = self.root
         for char in word:
             current.children.setdefault(char, Node(current, char))
@@ -48,7 +51,7 @@ class Trie(object):
         current.children.setdefault('$', Node(current))
 
     def remove(self, word):
-        """Remove a word from the Trie, if it's not in there, raise an error."""
+        """Remove a word from the Trie, if it's not in there, raise error."""
         current = self.root
         for char in word:
             if char not in current.children:
@@ -56,6 +59,7 @@ class Trie(object):
             current = current.children[char]
 
         if '$' in current.children:
+            self.size -= 1
             del current.children['$']
 
             current = current.parent

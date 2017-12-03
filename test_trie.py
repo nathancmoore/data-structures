@@ -35,13 +35,17 @@ def long_trie():
 
 
 def test_node_exists():
-    """Ensure that the Node class exists."""
-    assert Node(None)
+    """Ensure that the Node class and its arguments work and exist."""
+    assert Node(None, 'a')
+    assert Node(Node(None, 'a'))
 
 
 def test_trie_exists():
     """Ensure that the Trie class exists."""
-    assert Trie()
+    t = Trie()
+    assert t
+    assert t.root
+    assert t.trie_size == 0
 
 
 def test_insert_only_takes_str(empty_trie):
@@ -104,3 +108,15 @@ def test_remove_method_works(empty_trie, short_trie, long_trie):
     long_trie.remove('house')
     assert not long_trie.contains('house')
     assert long_trie.size() == 5
+
+
+def test_remove_word_isnt_there(short_trie, long_trie):
+    """Test that trying to remove a nonexistent word raises error."""
+    with pytest.raises(KeyError):
+        short_trie.remove('bung')
+    with pytest.raises(KeyError):
+        long_trie.remove('bung')
+    with pytest.raises(KeyError):
+        short_trie.remove('por')
+    with pytest.raises(KeyError):
+        long_trie.remove('antidis')

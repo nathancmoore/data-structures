@@ -185,3 +185,20 @@ _check_for_equivalence(value, node) - the _check_for_equivalence method recursiv
 depth() - the depth method returns the value of whichever tree attribute is higher: left_depth or right_depth. Its time complexity is O(1).
 
 in_order(), pre_order(), post_order(), breadth_first() - each of these methods first empties the tree's visited list, then returns a generator which traverses the tree, one node a time, yielding the value at the next node, as well as appending it to the visited list. Each iteration of the generator varies between O(1) and O(N), thus traversing the entire tree varies between O(N) and O(N^2).
+
+Trie
+**************************
+The trie holds words by breaking them into their constituent letters and making each letter into a node
+which points to its parent and children. Each word has a node at the end of it to indicate the end of a word.
+It has the following methods.
+
+size() - returns the number of words in the tree. Time Complexity - O(1)
+
+contains(word) - Returns a boolean of whether or not the provided word is in the tree. Time Complexity - O(N) 
+    where N is the length of the word + 1.
+
+insert(word) - inserts a word into the trie. Time Complexity O(N)
+    where N is the length of the word + 1.
+
+remove(word) - removes a word from the trie if it's in there. Time Complexity O(N + K)
+    where N is the length of the word + 1 and K is the number of letters in the word which need to be deleted because they do not belong to any other words. In the worst case, this would be all of them, so worst-case time complexity is O(N^2)

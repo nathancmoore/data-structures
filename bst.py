@@ -104,7 +104,7 @@ class BST(object):
                 node_to_add.parent = node_to_check
                 node_to_check.right = node_to_add
                 node_to_check.right.depth = node_to_check.depth + 1
-                self._rebalance(node_to_add.parent)
+                # self._rebalance(node_to_add.parent)
 
         elif node_to_add.val < node_to_check.val:
             if node_to_check.left:
@@ -113,7 +113,7 @@ class BST(object):
                 node_to_add.parent = node_to_check
                 node_to_check.left = node_to_add
                 node_to_check.left.depth = node_to_check.depth + 1
-                self._rebalance(node_to_add.parent)
+                # self._rebalance(node_to_add.parent)
 
     def search(self, value):
         """If a value is in the BST, return its node."""
@@ -289,10 +289,10 @@ class BST(object):
                 return
             if last_move_right:
                 node.parent.right = None
-                self._rebalance(node.parent)
+                # self._rebalance(node.parent)
                 return
             node.parent.left = None
-            self._rebalance(node.parent)
+            # self._rebalance(node.parent)
             return
 
         if node.left is None:
@@ -312,10 +312,10 @@ class BST(object):
 
             if first_move_right:
                 self.right_depth = self._reassess_depths(node.right)
-                self._rebalance(node.parent)
+                # self._rebalance(node.parent)
                 return
             self.left_depth = self._reassess_depths(node.right)
-            self._rebalance(node.parent)
+            # self._rebalance(node.parent)
             return
 
         if node.right is None:
@@ -333,10 +333,10 @@ class BST(object):
             node.left.parent = node.parent
             if first_move_right:
                     self.right_depth = self._reassess_depths(node.left)
-                    self._rebalance(node.parent)
+                    # self._rebalance(node.parent)
                     return
             self.left_depth = self._reassess_depths(node.left)
-            self._rebalance(node.parent)
+            # self._rebalance(node.parent)
             return
         else:
             replacement_node = self._locate_replacement_node(node)
@@ -361,8 +361,8 @@ class BST(object):
             else:
                 self.left_depth = self._reassess_depths(self.root.left)
 
-            if node.parent:
-                self._rebalance(node.parent)
+            # if node.parent:
+                # self._rebalance(node.parent)
             return
 
     def _reassess_depths(self, starting_node):
@@ -423,8 +423,8 @@ class BST(object):
             if child_balance == -1:
                 self._rotate_right(node)
 
-        if node.parent:
-            self._rebalance(node.parent)
+        # if node.parent:
+            # self._rebalance(node.parent)
 
     def _rotate_left(self, node):
         """Rotate a node leftwards around its right child."""
@@ -465,17 +465,17 @@ class BST(object):
         pivot_node.right = node
 
 
-# if __name__ == '__main__':  # pragma: no cover
-#     import timeit as time
+if __name__ == '__main__':  # pragma: no cover
+    import timeit as time
 
-#     l_imba = BST([6, 5, 4, 3, 2, 1])
-#     r_imba = BST([1, 2, 3, 4, 5, 6])
-#     sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
+    l_imba = BST([6, 5, 4, 3, 2, 1])
+    r_imba = BST([1, 2, 3, 4, 5, 6])
+    sample_tree = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])
 
-#     l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
-#     r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
-#     sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
+    l_imba = time.timeit("l_imba.search(5)", setup="from __main__ import l_imba")
+    r_imba = time.timeit("r_imba.search(5)", setup="from __main__ import r_imba")
+    sample_tree = time.timeit("sample_tree.search(8)", setup="from __main__ import sample_tree")
 
-#     print('Left-Skewed Search Time: ', l_imba)
-#     print('Right-Skewed Search Time: ', r_imba)
-#     print('Balanced Search Time: ', sample_tree)
+    print('Left-Skewed Search Time: ', l_imba)
+    print('Right-Skewed Search Time: ', r_imba)
+    print('Balanced Search Time: ', sample_tree)

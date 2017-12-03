@@ -406,12 +406,14 @@ class BST(object):
         if node_balance == 2:
             child_balance = self.balance(node.right)
 
-            if child_balance == 1:
+            if child_balance == 1 or child_balance == 0:
                 self._rotate_left(node)
+                print("left")
 
             if child_balance == -1:
                 self._rotate_right(node.right)
                 self._rotate_left(node)
+                print("right-left")
 
         if node_balance == -2:
             child_balance = self.balance(node.left)
@@ -419,9 +421,11 @@ class BST(object):
             if child_balance == 1:
                 self._rotate_left(node.left)
                 self._rotate_right(node)
+                print("left-right")
 
-            if child_balance == -1:
+            if child_balance == -1 or child_balance == 0:
                 self._rotate_right(node)
+                print("right")
 
         if node.parent:
             self._rebalance(node.parent)
@@ -431,7 +435,7 @@ class BST(object):
         pivot_node = node.right
 
         if node.parent:
-            node.parent.left = pivot_node
+            node.parent.right = pivot_node
 
         else:
             self.root = pivot_node
@@ -450,7 +454,7 @@ class BST(object):
         pivot_node = node.left
 
         if node.parent:
-            node.parent.right = pivot_node
+            node.parent.left = pivot_node
 
         else:
             self.root = pivot_node
@@ -479,3 +483,5 @@ class BST(object):
 #     print('Left-Skewed Search Time: ', l_imba)
 #     print('Right-Skewed Search Time: ', r_imba)
 #     print('Balanced Search Time: ', sample_tree)
+if __name__ == '__main__':
+    a = BST([20, 12, 10, 1, 11, 16, 30, 42, 28, 27])

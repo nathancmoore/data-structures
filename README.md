@@ -1,5 +1,7 @@
 # data-structures
 
+**Coverage**: [Build Status](https://travis-ci.org/nathancmoore/data-structures.svg?branch=master)
+
 
 
 Singly Linked List

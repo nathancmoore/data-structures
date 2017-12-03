@@ -33,3 +33,12 @@ class Trie(object):
             return True
 
         return False
+
+    def insert(self, word):
+        """Insert a word into the Trie."""
+        current = self.root
+        for char in word:
+            current.children.setdefault(char, Node(char))
+            current = current.children[char]
+
+        current.children.setdefault('$', Node())

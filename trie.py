@@ -17,11 +17,11 @@ class Trie(object):
     def __init__(self):
         """Constructor for the Trie class."""
         self.root = Node(None, '*')
-        self.size = 0
+        self.trie_size = 0
 
     def size(self):
         """Return the number of words in the Trie."""
-        return self.size
+        return self.trie_size
 
     def contains(self, word):
         """Return True if a word is in the Trie, False if not."""
@@ -41,7 +41,7 @@ class Trie(object):
         if type(word) is not str:
             raise TypeError('Only strings are valid inputs!')
 
-        self.size += 1
+        self.trie_size += 1
 
         current = self.root
         for char in word:
@@ -59,13 +59,14 @@ class Trie(object):
             current = current.children[char]
 
         if '$' in current.children:
-            self.size -= 1
+            self.trie_size -= 1
             del current.children['$']
 
             current = current.parent
             while len(current.children) == 1:
                 current.children.clear()
-                current = current.parent
+                if current.parent:
+                    current = current.parent
 
         else:
             raise KeyError('Word is not in the Trie!')

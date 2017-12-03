@@ -54,3 +54,53 @@ def test_insert_only_takes_str(empty_trie):
         empty_trie.insert(3.14159265)
     with pytest.raises(TypeError):
         empty_trie.insert({'party': 'time'})
+
+
+def test_size_method(empty_trie):
+    """Test that the size method returns the expected values."""
+    assert empty_trie.size() == 0
+    empty_trie.insert('a')
+    assert empty_trie.size() == 1
+    empty_trie.insert('bob')
+    assert empty_trie.size() == 2
+    empty_trie.remove('bob')
+    assert empty_trie.size() == 1
+
+
+def test_contains_method(short_trie, long_trie):
+    """Test the contains method with short and long words."""
+    assert short_trie.contains('pot')
+    assert short_trie.contains('port')
+    assert not short_trie.contains('house')
+    assert long_trie.contains('communism')
+    assert long_trie.contains('saddlemaker')
+    assert not long_trie.contains('chocolateparty')
+
+
+def test_insert_method_works(empty_trie, short_trie, long_trie):
+    """Test that the insert method changes the size and works."""
+    empty_trie.insert('house')
+    assert empty_trie.size() == 1
+    assert empty_trie.contains('house')
+    short_trie.insert('house')
+    assert short_trie.size() == 6
+    assert short_trie.contains('house')
+    long_trie.insert('house')
+    assert long_trie.size() == 6
+    assert long_trie.contains('house')
+
+
+def test_remove_method_works(empty_trie, short_trie, long_trie):
+    """Test that the remove method changes the size and works."""
+    empty_trie.insert('house')
+    empty_trie.remove('house')
+    assert not empty_trie.contains('house')
+    assert empty_trie.size() == 0
+    short_trie.insert('house')
+    short_trie.remove('house')
+    assert not short_trie.contains('house')
+    assert short_trie.size() == 5
+    long_trie.insert('house')
+    long_trie.remove('house')
+    assert not long_trie.contains('house')
+    assert long_trie.size() == 5

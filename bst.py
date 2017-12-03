@@ -479,3 +479,8 @@ if __name__ == '__main__':  # pragma: no cover
     print('Left-Skewed Search Time: ', l_imba)
     print('Right-Skewed Search Time: ', r_imba)
     print('Balanced Search Time: ', sample_tree)
+
+
+# Most of the commits are from Chelsea because I had database problems that didn't get resolved until Thursday. We pair-programmed it though. I promise, I contributed. 
+
+# ALSO, our default branch (which is normally called master) is actually front-end-1. Sorry if that's confusing.

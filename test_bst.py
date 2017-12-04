@@ -307,3 +307,42 @@ def test_breadth_first_sample_tree():
     for i in range(10):
         output.append(next(gen))
     assert output == [20, 12, 30, 10, 16, 28, 42, 1, 11, 27]
+
+
+def test_delete_on_empty_tree(sample_bst):
+    """Test that delete returns None on an empty tree."""
+    assert not sample_bst.delete(5)
+
+
+def test_delete_on_size_1(sample_bst):
+    """Test that delete works on a tree of size 1."""
+    sample_bst.insert(5)
+    sample_bst.delete(5)
+    assert sample_bst.size() == 0
+
+
+def test_delete_left_imba():
+    """Test that delete works on a left-imbalanced tree."""
+    tree = BST(LEFT_IMBALANCED)
+    tree.delete(6)
+    assert tree.size() == 5 and tree.root.val == 5
+    tree.delete(1)
+    assert tree.size() == 4 and tree.root.val == 5
+
+
+def test_delete_right_imba():
+    """Test that delete works on a right-imbalanced tree."""
+    tree = BST(RIGHT_IMBALANCED)
+    tree.delete(6)
+    assert tree.size() == 5 and tree.root.val == 1
+    tree.delete(1)
+    assert tree.size() == 4 and tree.root.val == 2
+
+
+def test_delete_on_sample_tree():
+    """Test that delete works on a right-imbalanced tree."""
+    tree = BST(SAMPLE_TREE)
+    tree.delete(16)
+    assert tree.size() == 9 and tree.root.val == 20
+    tree.delete(28)
+    assert tree.size() == 8 and tree.root.val == 20

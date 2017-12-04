@@ -281,7 +281,10 @@ class BST(object):
         self.tree_size -= 1
         is_root = node == self.root
         first_move_right = val > self.root.val
-        last_move_right = node == node.parent.right
+        if node.parent:
+            last_move_right = node == node.parent.right
+        else:
+            last_move_right = False
 
         if node.left is None and node.right is None:
             if is_root:
@@ -479,8 +482,3 @@ if __name__ == '__main__':  # pragma: no cover
     print('Left-Skewed Search Time: ', l_imba)
     print('Right-Skewed Search Time: ', r_imba)
     print('Balanced Search Time: ', sample_tree)
-
-
-# Most of the commits are from Chelsea because I had database problems that didn't get resolved until Thursday. We pair-programmed it though. I promise, I contributed. 
-
-# ALSO, our default branch (which is normally called master) is actually front-end-1. Sorry if that's confusing.

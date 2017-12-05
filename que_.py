@@ -3,7 +3,7 @@
 from doubly_linked_list import Node
 
 
-class Queue(object):
+class Queue():
     """Queue Class which is composed from Linked List."""
 
     def __init__(self):

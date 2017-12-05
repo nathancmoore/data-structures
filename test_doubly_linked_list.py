@@ -97,3 +97,9 @@ def test_if_shift_needs_no_inputs():
     test_dlinked_list.push(10)
     with pytest.raises(TypeError):
         test_dlinked_list.shift(5)
+
+def test_shift_removes():
+    from doubly_linked_list import DLinkedList
+    test_dlinked_list = DLinkedList()
+    test_dlinked_list.push(5)
+    assert test_dlinked_list.shift() == 5

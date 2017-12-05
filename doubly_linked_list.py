@@ -4,7 +4,7 @@
 class Node(object):
     """Define Node-class objects."""
 
-    def __init__(self, data=None, next_node=None, prev_node=None):
+    def __init__(self, data, next_node=None, prev_node=None):
         """Initiate a new instance of a Node object with attributes."""
         self.data = data
         self.next_node = next_node
@@ -30,38 +30,41 @@ class DLinkedList(object):
     def size(self):
         """Define the size method of the DLinkedList-class object."""
         current_node = self.head
-        print(type(self.head))
         count = 0
         while current_node:
             count += 1
-            current_node = current_node.next_node
-            print(type(current_node))
-            print(type(current_node.next_node))
+            if current_node.next_node:
+                current_node = current_node.next_node
+
+            else:
+                break
 
         return count
 
     def push(self, val):
         """Define the push method for DLinkedList-class object."""
-        new_node = Node(val, self.head)
+        new_node = Node(val)
 
         if self.size() == 0:
             self.tail = new_node
             self.head = new_node
 
         else:
+            new_node.next_node = self.head
             self.head.prev_node = new_node
 
         self.head = new_node
 
     def append(self, val):
         """Define the append method for DLinkedList-class object."""
-        new_node = Node(val, None, self.tail)
+        new_node = Node(val)
 
         if self.size() == 0:
             self.tail = new_node
             self.head = new_node
 
         else:
+            new_node.prev_node = self.tail
             self.tail.next_node = new_node
 
         self.tail = new_node

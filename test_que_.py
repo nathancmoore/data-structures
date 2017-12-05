@@ -1,44 +1,56 @@
 """Test the functionality of the Queue class."""
 
+import pytest
 
-def test_queue_exists():
-    """Test that a Queue object is created."""
+
+@pytest.fixture
+def sample_queue():
+    """Create a sample_queue fixture for testing."""
     from que_ import Queue
-    q = Queue()
-    assert q
+    return Queue()
 
 
-def test_head_tail_of_list_of_len_1():
+def test_queue_exists(sample_queue):
+    """Test that a Queue object is created correctly."""
+    assert sample_queue is not None
+    assert sample_queue.head is None
+    assert sample_queue.tail is None
+    assert sample_queue.size() == 0
+
+
+def test_head_tail_of_list_of_len_1(sample_queue):
     """Test that in a one-node list, the node is head and tail."""
-    from que_ import Queue
-    q = Queue()
-    q.enqueue(5)
-    assert q.linked_list.head
-    assert q.linked_list.tail
+    sample_queue.enqueue(5)
+    assert sample_queue.head
+    assert sample_queue.tail
 
 
-def test_output_of_peek_exists():
-    """Test that the output exists."""
-    from que_ import Queue
-    q = Queue()
-    q.enqueue(5)
-    assert q.peek() is not None
+def test_output_of_peek_is_correct(sample_queue):
+    """Test that the output is correct."""
+    sample_queue.enqueue(5)
+    assert sample_queue.peek() == 5
+    sample_queue.enqueue(6)
+    assert sample_queue.peek() == 5
+    sample_queue.dequeue()
+    assert sample_queue.peek() == 6
 
 
-def test_if_peek_needs_no_inputs():
+def test_if_peek_needs_no_inputs(sample_queue):
     """Test that an unnecessary parameter will raise a TypeError."""
     import pytest
-    from que_ import Queue
-    q = Queue()
-    q.enqueue(5)
+    sample_queue.enqueue(5)
     with pytest.raises(TypeError):
-        q.peek(5)
+        sample_queue.peek(5)
 
 
-def test_queue_len_method_is_working():
-    from que_ import Queue
-    q = Queue()
-    q.enqueue(1)
-    q.enqueue(2)
-    q.enqueue(3)
-    assert len(q) == 3
+def test_queue_len_method_is_working(sample_queue):
+    """Test that the len method works."""
+    assert len(sample_queue) == 0
+    sample_queue.enqueue(1)
+    assert len(sample_queue) == 1
+    sample_queue.enqueue(2)
+    assert len(sample_queue) == 2
+    sample_queue.dequeue()
+    assert len(sample_queue) == 1
+    sample_queue.dequeue()
+    assert len(sample_queue) == 0

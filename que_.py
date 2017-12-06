@@ -37,22 +37,21 @@ class Queue():
 
     def dequeue(self):
         """Remove from the front of the queue and return it's data."""
-        if self.head:
-            if self.size_ == 0:
-                raise IndexError("List is empty")
+        if self.size_ == 0:
+            raise IndexError("List is empty")
 
-            node_to_remove = self.head
+        node_to_remove = self.head
 
-            if self.size_ == 1:
-                self.size_ -= 1
-                self.head = None
-                self.tail = None
-                return node_to_remove.data
-
+        if self.size_ == 1:
             self.size_ -= 1
-            self.head.prev_node.next_node = None
-            self.head = self.head.prev_node
+            self.head = None
+            self.tail = None
             return node_to_remove.data
+
+        self.size_ -= 1
+        self.head.prev_node.next_node = None
+        self.head = self.head.prev_node
+        return node_to_remove.data
 
     def peek(self):
         """Return value of next element in queue."""

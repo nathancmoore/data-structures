@@ -29,12 +29,9 @@ class DLinkedList(object):
 
     def size(self):
         """Define the size method of the DLinkedList-class object."""
-        
         count = 0
 
-
         current_node = self.head
-<<<<<<< HEAD
         count = 0
         while current_node:
             count += 1
@@ -43,13 +40,6 @@ class DLinkedList(object):
 
             else:
                 break
-=======
-        print(type(self.head))
-        
-        while current_node:
-            count += 1
-            current_node = current_node.next_node
->>>>>>> 0c5e091464797ee4e19e7083a34200ad1ca050ad
 
         return count
 

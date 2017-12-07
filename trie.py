@@ -79,29 +79,30 @@ class Trie(object):
         if not self.root:
             return None
 
-        self.visited.append(self.root.val)
-
         for child in self.root.children.keys():
             if child not in self.visited:
                 self._traversal_helper(self.root.children[child])
 
         gen = self._traversal_gen(start)
 
+        self.visited.insert(0, self.root.val)
+
         return gen
 
     def _traversal_helper(self, start_node):
         """Recursive helper method for traversal method."""
-        print(self.visited)
         for child in start_node.children.keys():
-            if child not in self.visited:
+            # if child not in self.visited:
                 self._traversal_helper(start_node.children[child])
 
         self.visited.insert(0, start_node.val)
 
     def _traversal_gen(self, start):
         """Generator for the traversal method."""
-        while self.visited[0] != start:
-            self.visited.pop(0)
+        print(start)
+        while self.visited[-1] != start:
+            print("cut")
+            self.visited.pop(-1)
 
         while True:
             yield self.visited.pop(0)

@@ -18,6 +18,7 @@ class Trie(object):
         """Constructor for the Trie class."""
         self.root = Node(None, '*')
         self.trie_size = 0
+        self.visited = []
 
     def size(self):
         """Return the number of words in the Trie."""
@@ -70,3 +71,37 @@ class Trie(object):
 
         else:
             raise KeyError('Word is not in the Trie!')
+
+    def traversal(self, start='*'):
+        """Perform a depth-first traversal of the Trie."""
+        self.visited = []
+
+        if not self.root:
+            return None
+
+        self.visited.append(self.root.val)
+
+        for child in self.root.children.keys():
+            if child not in self.visited:
+                self._traversal_helper(self.root.children[child])
+
+        gen = self._traversal_gen(start)
+
+        return gen
+
+    def _traversal_helper(self, start_node):
+        """Recursive helper method for traversal method."""
+        print(self.visited)
+        for child in start_node.children.keys():
+            if child not in self.visited:
+                self._traversal_helper(start_node.children[child])
+
+        self.visited.insert(0, start_node.val)
+
+    def _traversal_gen(self, start):
+        """Generator for the traversal method."""
+        while self.visited[0] != start:
+            self.visited.pop(0)
+
+        while True:
+            yield self.visited.pop(0)

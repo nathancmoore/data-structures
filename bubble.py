@@ -21,14 +21,16 @@ def bubble_sort(a_list):
         loops += 1
 
 if __name__ == '__main__':
-    a = [9, 7, 10, 35, 2, 6, 1, 300, 26, 99]
-    b = []
-    c = [6]
-    d = [1, 2, 3, 4, 5, 6]
-    e = [3, 3, 3]
+    from timeit import timeit
+    from random import randint
+    good = sorted([randint(1, 1000) for i in range(10)])
+    bad = sorted([randint(1, 1000) for i in range(10)], reverse=True)
+    ran = [randint(1, 1000) for i in range(10)]
 
-    print(bubble_sort(a))
-    print(bubble_sort(b))
-    print(bubble_sort(c))
-    print(bubble_sort(d))
-    print(bubble_sort(e))
+    fast = timeit('bubble_sort(good[:])', setup="from __main__ import bubble_sort, good")
+    slow = timeit('bubble_sort(bad[:])', setup="from __main__ import bubble_sort, bad")
+    medium = timeit('bubble_sort(ran[:])', setup="from __main__ import bubble_sort, ran")
+
+    print("\nBest case: {}\n".format(fast))
+    print("Worst case: {}\n".format(slow))
+    print("Random case: {}\n".format(medium))

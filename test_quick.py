@@ -1,6 +1,6 @@
 """Various tests for quick_sort."""
 
-from bubble import quick_sort
+from quick import quick_sort
 from random import randint
 import pytest
 
@@ -37,4 +37,4 @@ def test_wrong_input_type():
 def test_correct_output():
     """Test that quick_sort sorts correctly."""
     for x in TEST_CASES:
-        assert quick_sort(x) == sorted(x)
+        assert quick_sort(x[::]) == sorted(x)

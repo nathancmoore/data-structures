@@ -22,3 +22,19 @@ def quick_sort(a_list):
             bigger.append(x)
 
     return quick_sort(smaller) + ref + quick_sort(bigger)
+
+
+if __name__ == '__main__':
+    from timeit import timeit
+    from random import randint
+    good = sorted([randint(1, 1000) for i in range(10)])
+    bad = sorted([randint(1, 1000) for i in range(10)], reverse=True)
+    ran = [randint(1, 1000) for i in range(10)]
+
+    fast = timeit('quick_sort(good[:])', setup="from __main__ import quick_sort, good")
+    slow = timeit('quick_sort(bad[:])', setup="from __main__ import quick_sort, bad")
+    medium = timeit('quick_sort(ran[:])', setup="from __main__ import quick_sort, ran")
+
+    print("\nPre-Sorted: {}\n".format(fast))
+    print("Pre-Sorted and Reversed: {}\n".format(slow))
+    print("Random: {}\n".format(medium))

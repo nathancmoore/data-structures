@@ -17,10 +17,10 @@ def merge_sort(a_list):
         parts.append([x])
 
     while len(parts) > 1:
-        if len(parts[0]) == len(parts[1]):
-            parts.insert(0, _merge(parts.pop(0), parts.pop(1)))
+        if len(parts[0]) == len(parts[1]) or len(parts) == 2:
+            parts.insert(0, _merge(parts.pop(0), parts.pop(0)))
         else:
-            parts.insert(0, _merge(parts.pop(0), _merge(parts.pop(1), parts.pop(2)))
+            parts.insert(0, _merge(parts.pop(0), _merge(parts.pop(0), parts.pop(0)))
 
 
 def _merge(part_a, part_b):

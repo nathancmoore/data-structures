@@ -30,7 +30,22 @@ class LinkedList {
         if (!this.root) {
             throw 'List is empty!';
         }
-        poppedValue = this.root.val;
+        this.size --;
+        let poppedValue = this.root.val;
         this.root = this.root.nextNode;
         return poppedValue;
+    }
+
+    size() {
+        return this.size;
+    }
+
+    search(value) {
+        let current = this.root;
+        while (current) {
+            if(current.val == value) {
+                return current.val;
+            }
+            current = current.nextNode;
+        }
     }

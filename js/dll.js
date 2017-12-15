@@ -95,7 +95,7 @@ class DLL {
         let previous = null
         while (current) {
             if (current.val == value) {
-                this.length -= 1
+                this.length --
                 if (this.length == 0) {
                     this.head = null
                     this.tail = null

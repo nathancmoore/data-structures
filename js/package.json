@@ -1,0 +1,14 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "extra credit js assignments",
+  "main": "linked_list.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Nathan Moore",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}

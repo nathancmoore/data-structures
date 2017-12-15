@@ -89,9 +89,5 @@ class LinkedList {
 
 module.exports = {LinkedList, Node}
 
-// if(require.main === module){
-//     var list = new LinkedList([1, 2, 3, 4])
-//     console.log(list.display())
-//     console.log(list.size())
-//     console.log(list.remove(6))
-// }
+if(require.main === module){
+}
